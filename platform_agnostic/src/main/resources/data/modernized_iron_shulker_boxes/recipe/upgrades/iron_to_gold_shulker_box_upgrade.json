@@ -1,0 +1,22 @@
+{
+  	"type": "minecraft:crafting_shaped",
+	"show_notification": true,
+  	"category": "misc",
+  	"key": {
+	    "G": {
+			"item": "minecraft:gold_ingot"
+    	},
+		"I": {
+			"item": "minecraft:iron_ingot"
+    	}
+  	},
+  	"pattern": [
+    	"GIG",
+    	"GGG",
+    	"GGG"
+  	],
+  	"result": {
+		"count": 1,
+    	"id": "modernized_iron_shulker_boxes:iron_to_gold_shulker_box_upgrade"
+  	}
+}

@@ -1,0 +1,25 @@
+{
+  	"type": "minecraft:crafting_shaped",
+	"show_notification": true,
+  	"category": "misc",
+  	"key": {
+		"G": {
+      		"item": "minecraft:glass"
+		},
+		"D": {
+      		"item": "minecraft:diamond"
+		},
+		"I": {
+      		"item": "minecraft:gold_ingot"
+    	}
+  	},
+  	"pattern": [
+    	"GDG",
+    	"GIG",
+    	"GDG"
+  	],
+  	"result": {
+		"count": 1,
+    	"id": "modernized_iron_shulker_boxes:gold_to_diamond_shulker_box_upgrade"
+  	}
+}

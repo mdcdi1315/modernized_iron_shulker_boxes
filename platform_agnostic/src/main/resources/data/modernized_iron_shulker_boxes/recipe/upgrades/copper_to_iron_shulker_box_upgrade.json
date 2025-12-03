@@ -1,0 +1,25 @@
+{
+  	"type": "minecraft:crafting_shaped",
+  	"category": "misc",
+	"show_notification": true,
+  	"key": {
+    	"C": {
+      		"item": "minecraft:copper_ingot"
+    	},
+		"G": {
+      		"item": "minecraft:glass"
+		},
+    	"I": {
+      		"item": "minecraft:iron_ingot"
+    	}
+  	},
+  	"pattern": [
+	    "IGI",
+    	"GCG",
+    	"IGI"
+  	],
+  	"result": {
+		"count": 1,
+    	"id": "modernized_iron_shulker_boxes:copper_to_iron_shulker_box_upgrade"
+  	}
+}

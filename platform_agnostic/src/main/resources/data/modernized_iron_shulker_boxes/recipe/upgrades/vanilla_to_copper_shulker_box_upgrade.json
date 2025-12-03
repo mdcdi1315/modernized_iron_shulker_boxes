@@ -1,0 +1,22 @@
+{
+  	"type": "minecraft:crafting_shaped",
+	"show_notification": true,
+  	"category": "misc",
+  	"key": {
+    	"C": {
+      		"item": "minecraft:copper_ingot"
+    	},
+    	"S": {
+      		"item": "minecraft:shulker_shell"
+    	}
+  	},
+  	"pattern": [
+    	"CCC",
+    	"CSC",
+    	"CCC"
+  	],
+  	"result": {
+		"count": 1,
+    	"id": "modernized_iron_shulker_boxes:vanilla_to_copper_shulker_box_upgrade"
+  	}
+}

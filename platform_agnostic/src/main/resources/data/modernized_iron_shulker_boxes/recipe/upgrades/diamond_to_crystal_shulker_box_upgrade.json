@@ -1,0 +1,22 @@
+{
+  	"type": "minecraft:crafting_shaped",
+  	"category": "misc",
+	"show_notification": true,
+  	"key": {
+    	"G": {
+      		"item": "minecraft:glass"
+    	},
+    	"O": {
+      		"item": "minecraft:obsidian"
+    	}
+  	},
+  	"pattern": [
+    	"GOG",
+    	"GGG",
+    	"GGG"
+  	],
+  	"result": {
+		"count": 1,
+    	"id": "modernized_iron_shulker_boxes:diamond_to_crystal_shulker_box_upgrade"
+  	}
+}

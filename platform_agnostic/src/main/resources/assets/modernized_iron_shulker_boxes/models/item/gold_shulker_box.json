@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/template_shulker_box",
+  "textures": {
+    "particle": "modernized_iron_shulker_boxes:block/gold_break"
+  }
+}

@@ -1,0 +1,6 @@
+{
+	"type": "modernized_iron_shulker_boxes:iron_shulker_box_crafting_coloring", 
+	"group": "modernized_iron_shulker_boxes:shulker_box_coloring_cyan", 
+	"color": "CYAN", 
+	"shulker_box": "modernized_iron_shulker_boxes:copper_shulker_box" 
+}

@@ -1,0 +1,34 @@
+# eclipse
+bin
+*.launch
+.eclipse
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+runs
+runserver
+logs
+
+# Visual Studio (Used in developing Docs branch)
+.vs
+
+# Subfolders created in deps directory must be excluded
+deps/*/
+
+common/src/generated/resources/.cache

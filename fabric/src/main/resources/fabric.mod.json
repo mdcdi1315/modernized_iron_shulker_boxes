@@ -1,0 +1,47 @@
+{
+	"schemaVersion": 1,
+	"id": "${mod_id}",
+	"version": "${version}",
+	"name": "${mod_name}",
+	"icon": "${mod_id}-icon.png",
+	"description": "${description}",
+	"authors": [
+		"${mod_author}"
+	],
+	"contact": {
+		"homepage": "${homepage}",
+		"sources": "${sources}",
+		"issues": "${issues}"
+	},
+
+	"custom": {
+		"modmenu": {
+			"update_checker": false,
+			"links": {
+				"modmenu.discord": "${discord}"
+			}
+		}
+	},
+
+	"license": "${license}",
+	"environment": "*",
+	"entrypoints": {
+		"mdcdi1315_basemodslib_server": [
+			"${group}.${mod_id}.IronShulkerBoxesModInstance"
+		],
+		"mdcdi1315_basemodslib_client": [
+			"${group}.${mod_id}.client.IronShulkerBoxesClientModInstance"
+		],
+		"fabric-datagen": []
+	},
+	"mixins": [
+		"${mod_id}.mixins.json"
+	],
+	"depends": {
+		"java": ">=${java_version}",
+		"minecraft": "=${minecraft_version}",
+		"fabricloader": ">=${fabric_loader_version}",
+		"fabric-api": ">=${fabric_version}",
+		"mdcdi1315_base_mods_lib": ">=${base_mods_lib_version}"
+	}
+}

@@ -1,0 +1,30 @@
+repositories {
+    maven {
+        url = "https://www.cursemaven.com"
+        content {
+            includeGroup 'curse.maven'
+        }
+    }
+	
+	maven {
+        // Mod menu integration, imported in by my library.
+        name = "Terraformers"
+        url = "https://maven.terraformersmc.com/"
+    }
+
+    maven {
+        // JEI support
+        name 'BlameJared Maven'
+        url 'https://maven.blamejared.com'
+    }
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Minecraft'
+                url = 'https://libraries.minecraft.net/'
+            }
+        }
+        filter { includeGroupAndSubgroups("com.mojang") }
+    }
+}

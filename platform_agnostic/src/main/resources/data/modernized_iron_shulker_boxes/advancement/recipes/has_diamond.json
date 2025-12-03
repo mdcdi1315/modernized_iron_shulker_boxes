@@ -1,0 +1,28 @@
+{
+	"parent": "minecraft:recipes/root",
+	"criteria": {
+		"has_shulker_box": {
+			"conditions": {
+				"items": [
+					{
+						"items": "modernized_iron_shulker_boxes:diamond_shulker_box"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"requirements": [
+		[
+			"has_shulker_box"
+		]
+	],
+	"rewards": {
+		"recipes": [
+			"modernized_iron_shulker_boxes:shulker_boxes_default/crystal_shulker_box",
+			"modernized_iron_shulker_boxes:upgrades/diamond_to_crystal_shulker_box_upgrade",
+			"modernized_iron_shulker_boxes:shulker_boxes_default/obsidian_shulker_box",
+			"modernized_iron_shulker_boxes:upgrades/diamond_to_obsidian_shulker_box_upgrade"
+		]
+	}
+}

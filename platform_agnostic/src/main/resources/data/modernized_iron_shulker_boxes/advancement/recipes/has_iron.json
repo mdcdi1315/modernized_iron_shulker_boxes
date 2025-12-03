@@ -1,0 +1,26 @@
+{
+	"parent": "minecraft:recipes/root",
+	"criteria": {
+		"has_shulker_box": {
+			"conditions": {
+				"items": [
+					{
+						"items": "modernized_iron_shulker_boxes:iron_shulker_box"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"requirements": [
+		[
+			"has_shulker_box"
+		]
+	],
+	"rewards": {
+		"recipes": [
+			"modernized_iron_shulker_boxes:shulker_boxes_default/gold_shulker_box",
+			"modernized_iron_shulker_boxes:upgrades/iron_to_gold_shulker_box_upgrade"
+		]
+	}
+}

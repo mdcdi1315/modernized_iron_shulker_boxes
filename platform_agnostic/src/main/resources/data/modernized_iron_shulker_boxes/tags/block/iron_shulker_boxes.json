@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values": [
+		"modernized_iron_shulker_boxes:iron_shulker_box",
+		"modernized_iron_shulker_boxes:gold_shulker_box",
+		"modernized_iron_shulker_boxes:diamond_shulker_box",
+		"modernized_iron_shulker_boxes:copper_shulker_box",
+		"modernized_iron_shulker_boxes:crystal_shulker_box",
+		"modernized_iron_shulker_boxes:obsidian_shulker_box"
+	]
+}

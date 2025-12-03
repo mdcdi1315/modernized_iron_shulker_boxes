@@ -1,0 +1,6 @@
+{
+	"type": "modernized_iron_shulker_boxes:iron_shulker_box_crafting_coloring", 
+	"group": "modernized_iron_shulker_boxes:shulker_box_coloring_white", 
+	"color": "WHITE", 
+	"shulker_box": "modernized_iron_shulker_boxes:crystal_shulker_box" 
+}

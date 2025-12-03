@@ -1,0 +1,29 @@
+{
+	"type": "minecraft:block",
+	"pools": [
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"functions": [
+						{
+							"function": "minecraft:copy_components",
+							"include": [
+								"minecraft:custom_name",
+								"minecraft:container",
+								"minecraft:lock",
+								"minecraft:container_loot",
+								"modernized_iron_shulker_boxes:i_s_box_color"
+							],
+							"source": "block_entity"
+						}
+					],
+					"name": "modernized_iron_shulker_boxes:gold_shulker_box"
+				}
+			],
+			"rolls": 1.0
+		}
+	],
+	"random_sequence": "modernized_iron_shulker_boxes:blocks/gold_shulker_box"
+}

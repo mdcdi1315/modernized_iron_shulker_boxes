@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"show_notification": true,
+	"category": "misc",
+	"key": {
+		"S": {
+			"item": "modernized_iron_shulker_boxes:diamond_shulker_box"
+		},
+		"G": {
+			"item": "minecraft:glass"
+		}
+	},
+	"pattern": [
+		"GGG",
+		"GSG",
+		"GGG"
+	],
+	"result": {
+		"count": 1,
+		"id": "modernized_iron_shulker_boxes:crystal_shulker_box"
+	}
+}

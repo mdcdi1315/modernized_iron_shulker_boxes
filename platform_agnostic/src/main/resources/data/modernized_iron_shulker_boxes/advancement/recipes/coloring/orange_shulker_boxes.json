@@ -1,0 +1,35 @@
+{
+	"parent": "minecraft:recipes/root",
+	"criteria": {
+		"has_dye_recipe": {
+			"conditions": {
+				"recipe": "minecraft:orange_dye"
+			},
+			"trigger": "minecraft:recipe_unlocked"
+		},
+		"has_the_obsidian_shulker_box": {
+			"conditions": {
+				"recipe": "modernized_iron_shulker_boxes:shulker_boxes_default/obsidian_shulker_box"
+			},
+			"trigger": "minecraft:recipe_unlocked"
+		}
+	},
+	"requirements": [
+		[
+			"has_dye_recipe"
+		],
+		[
+			"has_the_obsidian_shulker_box"
+		]
+	],
+	"rewards": {
+		"recipes": [
+			"modernized_iron_shulker_boxes:shulker_boxes_coloring/orange_iron_shulker_box_recipe",
+			"modernized_iron_shulker_boxes:shulker_boxes_coloring/orange_gold_shulker_box_recipe",
+			"modernized_iron_shulker_boxes:shulker_boxes_coloring/orange_diamond_shulker_box_recipe",
+			"modernized_iron_shulker_boxes:shulker_boxes_coloring/orange_copper_shulker_box_recipe",
+			"modernized_iron_shulker_boxes:shulker_boxes_coloring/orange_crystal_shulker_box_recipe",
+			"modernized_iron_shulker_boxes:shulker_boxes_coloring/orange_obsidian_shulker_box_recipe"
+		]
+	}
+}
