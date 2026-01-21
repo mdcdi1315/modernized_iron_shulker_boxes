@@ -11,18 +11,17 @@ import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.AbstractIronShul
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity.IronShulkerBoxesBlockEntities;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.datacomponent.IronShulkerBoxColorDataComponentType;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.List;
-import java.util.Locale;
 
 public final class IronShulkerBoxItem
     extends BlockItem
@@ -105,8 +104,7 @@ public final class IronShulkerBoxItem
         return !((b instanceof AbstractIronShulkerBoxBlock) || (b instanceof ShulkerBoxBlock));
     }
 
-    @Override
-    public BlockEntity GetBlockEntity() {
+    public BlockEntity GetBlockEntity(ItemStack stack) {
         return block_ent_to_render_getter.function();
     }
 

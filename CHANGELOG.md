@@ -1,9 +1,11 @@
 
 
-### Releasing Version 1 Release Candidate:
+### Releasing Version 1 Release Candidate 2:
 
-Initial playtesting version. 
+-> Fixes most of the bugs!
 
-More features will be added in the future before releasing the final version. 
+-> Memory footprint for the inventory slots is now eliminated and the slots array will be created on the fly when and once needed.
 
-Report bugs as you find them!
+-> The Crystal Shulker Box renderer is now moved to its own class so that the rendering loop becomes a bit faster
+
+-> Added the Netherite Shulker Box!

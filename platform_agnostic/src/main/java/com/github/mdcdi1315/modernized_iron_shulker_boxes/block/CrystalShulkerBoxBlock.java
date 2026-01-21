@@ -30,7 +30,7 @@ public class CrystalShulkerBoxBlock
     @Override
     @MaybeNull
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, this.block_ent_type.function(), CrystalShulkerBoxBlockEntity::tick);
+        return createTickerHelper(pBlockEntityType, this.block_ent_type.function(), CrystalShulkerBoxBlockEntity::tick_crystal);
     }
 
     @Override

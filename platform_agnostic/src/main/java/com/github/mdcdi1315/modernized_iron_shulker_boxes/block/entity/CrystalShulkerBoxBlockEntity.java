@@ -8,7 +8,6 @@ import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxes
 import net.minecraft.nbt.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Inventory;
@@ -44,11 +43,11 @@ public final class CrystalShulkerBoxBlockEntity
         super.setLevel(level);
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, AbstractIronShulkerBoxBlockEntity pBlockEntity)
+    public static void tick_crystal(Level pLevel, BlockPos pPos, BlockState pState, AbstractIronShulkerBoxBlockEntity p_entity)
     {
-        pBlockEntity.updateAnimation(pLevel, pPos, pState);
+        AbstractIronShulkerBoxBlockEntity.tick(pLevel, pPos, pState, p_entity);
 
-        if (!pLevel.isClientSide && pBlockEntity instanceof CrystalShulkerBoxBlockEntity csb && csb.inventory_touched) {
+        if (!pLevel.isClientSide && p_entity instanceof CrystalShulkerBoxBlockEntity csb && csb.inventory_touched) {
             csb.inventory_touched = false;
             csb.SortAndDispatchStacksToClient();
         }
@@ -71,8 +70,7 @@ public final class CrystalShulkerBoxBlockEntity
     }
 
     @Override
-    protected void LoadBlockEntityData(CompoundTag tag, HolderLookup.Provider registries) {
-        super.LoadBlockEntityData(tag, registries);
+    protected void OnLoad() {
         inventory_touched = true;
     }
 
@@ -93,8 +91,8 @@ public final class CrystalShulkerBoxBlockEntity
         Set<ItemStack> set = new HashSet<>(TOP_STACKS_COUNT);
 
         List<ItemStack> items = getItems();
-        int size = items.size(), count = Math.min(size, 8), I = 0;
-        for (int C = 0; C < count && I < size; ) // Run 8 or fewer times, depending on the items contained in the shulker box.
+        int size = items.size(), count = Math.min(size, TOP_STACKS_COUNT);
+        for (int C = 0, I = 0; C < count && I < size; ) // Run 8 or fewer times, depending on the items contained in the shulker box.
         {
             for (; I < size; I++) {
                 // Check, this item type has been already pushed to the top stacks list?

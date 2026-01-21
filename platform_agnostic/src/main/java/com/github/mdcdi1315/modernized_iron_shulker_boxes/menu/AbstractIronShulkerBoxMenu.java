@@ -19,8 +19,13 @@ public abstract class AbstractIronShulkerBoxMenu
     protected final Container container;
     private final IronShulkerBoxesTypes type;
 
-    protected AbstractIronShulkerBoxMenu(@MaybeNull MenuType<?> menuType, int container_id, Inventory player_inventory, Container box_inventory, IronShulkerBoxesTypes box_type)
-    {
+    protected AbstractIronShulkerBoxMenu(
+            @MaybeNull MenuType<?> menuType,
+            int container_id, 
+            Inventory player_inventory,
+            Container box_inventory,
+            IronShulkerBoxesTypes box_type
+    ) {
         super(menuType, container_id);
         checkContainerSize(this.container = box_inventory , (this.type = box_type).size);
 

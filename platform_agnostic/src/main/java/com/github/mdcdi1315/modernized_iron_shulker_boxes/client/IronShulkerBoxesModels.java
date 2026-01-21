@@ -22,6 +22,7 @@ public final class IronShulkerBoxesModels
         CRYSTAL_SHULKER_TEXTURE_LOCATION = ResourceLocation.tryBuild(IronShulkerBoxesModInstance.MOD_ID, "model/default/shulker_crystal");
         DIAMOND_SHULKER_TEXTURE_LOCATION = ResourceLocation.tryBuild(IronShulkerBoxesModInstance.MOD_ID, "model/default/shulker_diamond");
         OBSIDIAN_SHULKER_TEXTURE_LOCATION = ResourceLocation.tryBuild(IronShulkerBoxesModInstance.MOD_ID, "model/default/shulker_obsidian");
+        NETHERITE_SHULKER_TEXTURE_LOCATION = ResourceLocation.tryBuild(IronShulkerBoxesModInstance.MOD_ID, "model/default/shulker_netherite");
         List<String> values = IronShulkerBoxColor.AsListWithoutNone();
         IRON_COLORED_SHULKER_TEXTURE_LOCATION = values.stream().map((color) -> getShulkerBoxResourceLocation("iron", color)).collect(ImmutableList.toImmutableList());
         GOLD_COLORED_SHULKER_TEXTURE_LOCATION = values.stream().map((color) -> getShulkerBoxResourceLocation("gold", color)).collect(ImmutableList.toImmutableList());
@@ -29,6 +30,7 @@ public final class IronShulkerBoxesModels
         DIAMOND_COLORED_SHULKER_TEXTURE_LOCATION = values.stream().map((color) -> getShulkerBoxResourceLocation("diamond", color)).collect(ImmutableList.toImmutableList());
         CRYSTAL_COLORED_SHULKER_TEXTURE_LOCATION = values.stream().map((color) -> getShulkerBoxResourceLocation("crystal", color)).collect(ImmutableList.toImmutableList());
         OBSIDIAN_COLORED_SHULKER_TEXTURE_LOCATION = values.stream().map((color) -> getShulkerBoxResourceLocation("obsidian", color)).collect(ImmutableList.toImmutableList());
+        NETHERITE_COLORED_SHULKER_TEXTURE_LOCATION = values.stream().map((color) -> getShulkerBoxResourceLocation("netherite", color)).collect(ImmutableList.toImmutableList());
         COLORED_SHULKER_TEXTURE_LOCATION = values.stream().map(IronShulkerBoxesModels::getShulkerBoxResourceLocation).collect(ImmutableList.toImmutableList());
     }
 
@@ -38,6 +40,7 @@ public final class IronShulkerBoxesModels
     public static final List<ResourceLocation> COPPER_COLORED_SHULKER_TEXTURE_LOCATION;
     public static final List<ResourceLocation> CRYSTAL_COLORED_SHULKER_TEXTURE_LOCATION;
     public static final List<ResourceLocation> OBSIDIAN_COLORED_SHULKER_TEXTURE_LOCATION;
+    public static final List<ResourceLocation> NETHERITE_COLORED_SHULKER_TEXTURE_LOCATION;
     public static final List<ResourceLocation> COLORED_SHULKER_TEXTURE_LOCATION;
 
     public static final ResourceLocation SHULKER_TEXTURE_LOCATION;
@@ -47,6 +50,7 @@ public final class IronShulkerBoxesModels
     public static final ResourceLocation DIAMOND_SHULKER_TEXTURE_LOCATION;
     public static final ResourceLocation CRYSTAL_SHULKER_TEXTURE_LOCATION;
     public static final ResourceLocation OBSIDIAN_SHULKER_TEXTURE_LOCATION;
+    public static final ResourceLocation NETHERITE_SHULKER_TEXTURE_LOCATION;
 
     private static ResourceLocation getShulkerBoxResourceLocation(String typeName, String colorName) {
         return ResourceLocation.tryBuild(IronShulkerBoxesModInstance.MOD_ID, "model/" + colorName + "/shulker_" + colorName + "_" + typeName);
@@ -64,6 +68,7 @@ public final class IronShulkerBoxesModels
             case COPPER -> COPPER_COLORED_SHULKER_TEXTURE_LOCATION.get(dyeColor);
             case CRYSTAL -> CRYSTAL_COLORED_SHULKER_TEXTURE_LOCATION.get(dyeColor);
             case OBSIDIAN -> OBSIDIAN_COLORED_SHULKER_TEXTURE_LOCATION.get(dyeColor);
+            case NETHERITE -> NETHERITE_COLORED_SHULKER_TEXTURE_LOCATION.get(dyeColor);
             default -> COLORED_SHULKER_TEXTURE_LOCATION.get(dyeColor);
         };
     }
@@ -76,6 +81,7 @@ public final class IronShulkerBoxesModels
             case COPPER -> COPPER_SHULKER_TEXTURE_LOCATION;
             case CRYSTAL -> CRYSTAL_SHULKER_TEXTURE_LOCATION;
             case OBSIDIAN -> OBSIDIAN_SHULKER_TEXTURE_LOCATION;
+            case NETHERITE -> NETHERITE_SHULKER_TEXTURE_LOCATION;
             default -> SHULKER_TEXTURE_LOCATION;
         };
     }

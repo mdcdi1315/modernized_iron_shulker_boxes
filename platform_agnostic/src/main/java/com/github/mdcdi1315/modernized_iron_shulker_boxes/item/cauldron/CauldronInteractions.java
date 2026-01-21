@@ -24,6 +24,7 @@ public final class CauldronInteractions
         m.put(IronShulkerBoxesItems.CRYSTAL_SHULKER_BOX, CLEAR);
         m.put(IronShulkerBoxesItems.DIAMOND_SHULKER_BOX, CLEAR);
         m.put(IronShulkerBoxesItems.OBSIDIAN_SHULKER_BOX, CLEAR);
+        m.put(IronShulkerBoxesItems.NETHERITE_SHULKER_BOX, CLEAR);
         IronShulkerBoxesDestroyShulkerBoxInteraction DESTROY = new IronShulkerBoxesDestroyShulkerBoxInteraction();
         m = CauldronInteraction.LAVA.map();
         m.put(IronShulkerBoxesItems.IRON_SHULKER_BOX, DESTROY);
@@ -32,5 +33,6 @@ public final class CauldronInteractions
         m.put(IronShulkerBoxesItems.CRYSTAL_SHULKER_BOX, DESTROY);
         m.put(IronShulkerBoxesItems.DIAMOND_SHULKER_BOX, DESTROY);
         m.put(IronShulkerBoxesItems.OBSIDIAN_SHULKER_BOX, DESTROY);
+        m.put(IronShulkerBoxesItems.NETHERITE_SHULKER_BOX, DESTROY);
     }
 }

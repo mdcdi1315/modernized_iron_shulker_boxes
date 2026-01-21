@@ -50,10 +50,7 @@ public final class IronShulkerBoxScreen
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, this.type.guiTexture);
 
-        int x = (this.width - this.imageWidth) / 2;
-        int y = (this.height - this.imageHeight) / 2;
-
-        guiGraphics.blit(this.type.guiTexture, x, y, 0, 0, this.imageWidth, this.imageHeight, this.textureXSize, this.textureYSize);
+        guiGraphics.blit(this.type.guiTexture, (this.width - this.imageWidth) / 2, (this.height - this.imageHeight) / 2, 0, 0, this.imageWidth, this.imageHeight, this.textureXSize, this.textureYSize);
     }
 }
 

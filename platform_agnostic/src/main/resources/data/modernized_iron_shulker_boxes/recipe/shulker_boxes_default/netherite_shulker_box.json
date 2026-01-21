@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"show_notification": true,
+	"category": "misc",
+	"key": {
+		"N": {
+			"item": "minecraft:netherite_ingot"
+		},
+		"O": {
+			"item": "minecraft:obsidian"
+		},
+		"D": {
+			"item": "minecraft:diamond"
+		},
+		"S": {
+			"item": "modernized_iron_shulker_boxes:obsidian_shulker_box"
+		}
+	},
+	"pattern": [
+		"NNN",
+		"OSO",
+		"DDD"
+	],
+	"result": {
+		"count": 1,
+		"id": "modernized_iron_shulker_boxes:netherite_shulker_box"
+	}
+}

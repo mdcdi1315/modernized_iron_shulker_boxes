@@ -48,7 +48,7 @@ public static void GenerateColorRecipes(DirectoryInfo di)
 	}
 	
 	String[] colors = { "WHITE", "ORANGE", "MAGENTA", "LIGHT_BLUE", "YELLOW", "LIME", "PINK", "GRAY", "LIGHT_GRAY", "CYAN", "PURPLE", "BLUE", "BROWN", "GREEN", "RED", "BLACK" };
-	String[] shulker_boxes = { $"{NAMESPACE}:iron_shulker_box", $"{NAMESPACE}:gold_shulker_box", $"{NAMESPACE}:diamond_shulker_box", $"{NAMESPACE}:copper_shulker_box", $"{NAMESPACE}:crystal_shulker_box", $"{NAMESPACE}:obsidian_shulker_box" };
+	String[] shulker_boxes = { $"{NAMESPACE}:iron_shulker_box", $"{NAMESPACE}:gold_shulker_box", $"{NAMESPACE}:diamond_shulker_box", $"{NAMESPACE}:copper_shulker_box", $"{NAMESPACE}:crystal_shulker_box", $"{NAMESPACE}:obsidian_shulker_box", $"{NAMESPACE}:netherite_shulker_box" };
 	List<String> names = new(colors.Length * shulker_boxes.Length);
 	foreach (String c in colors) {
 		foreach (String sb in shulker_boxes) {

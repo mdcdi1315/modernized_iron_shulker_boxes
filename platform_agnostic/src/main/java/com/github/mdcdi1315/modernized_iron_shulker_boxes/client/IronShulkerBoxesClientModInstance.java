@@ -37,11 +37,16 @@ public final class IronShulkerBoxesClientModInstance
 
         registrar.Register(new BlockEntityRendererRegistrationInfo<>(
                 () -> IronShulkerBoxesBlockEntities.CRYSTAL_SHULKER_BOX,
-                IronShulkerBoxRenderer::new
+                CrystalIronShulkerBoxRenderer::new
         ));
 
         registrar.Register(new BlockEntityRendererRegistrationInfo<>(
                 () -> IronShulkerBoxesBlockEntities.OBSIDIAN_SHULKER_BOX,
+                IronShulkerBoxRenderer::new
+        ));
+
+        registrar.Register(new BlockEntityRendererRegistrationInfo<>(
+                () -> IronShulkerBoxesBlockEntities.NETHERITE_SHULKER_BOX,
                 IronShulkerBoxRenderer::new
         ));
     }
@@ -76,6 +81,11 @@ public final class IronShulkerBoxesClientModInstance
 
         registrar.RegisterMenuScreen(
                 () -> IronShulkerBoxesMenuTypes.OBSIDIAN_SHULKER_BOX,
+                IronShulkerBoxScreen::new
+        );
+
+        registrar.RegisterMenuScreen(
+                () -> IronShulkerBoxesMenuTypes.NETHERITE_SHULKER_BOX,
                 IronShulkerBoxScreen::new
         );
     }

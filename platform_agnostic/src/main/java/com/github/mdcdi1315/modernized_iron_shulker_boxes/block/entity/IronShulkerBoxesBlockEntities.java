@@ -52,6 +52,7 @@ public final class IronShulkerBoxesBlockEntities
     public static BlockEntityType<DiamondShulkerBoxBlockEntity> DIAMOND_SHULKER_BOX;
     public static BlockEntityType<CrystalShulkerBoxBlockEntity> CRYSTAL_SHULKER_BOX;
     public static BlockEntityType<ObsidianShulkerBoxBlockEntity> OBSIDIAN_SHULKER_BOX;
+    public static BlockEntityType<NetheriteIronShulkerBoxBlockEntity> NETHERITE_SHULKER_BOX;
 
     public static IronShulkerBoxBlockEntity ITEM_REND_IRON_SHULKER_BOX;
     public static GoldShulkerBoxBlockEntity ITEM_REND_GOLD_SHULKER_BOX;
@@ -59,6 +60,7 @@ public final class IronShulkerBoxesBlockEntities
     public static DiamondShulkerBoxBlockEntity ITEM_REND_DIAMOND_SHULKER_BOX;
     public static CrystalShulkerBoxBlockEntity ITEM_REND_CRYSTAL_SHULKER_BOX;
     public static ObsidianShulkerBoxBlockEntity ITEM_REND_OBSIDIAN_SHULKER_BOX;
+    public static NetheriteIronShulkerBoxBlockEntity ITEM_REND_NETHERITE_SHULKER_BOX;
 
     public static void Initialize(IBlockEntityRegistrar registrar)
     {
@@ -68,6 +70,7 @@ public final class IronShulkerBoxesBlockEntities
         registrar.Register("diamond_shulker_box", new IronShulkerBoxEntityFactory<>(DiamondShulkerBoxBlockEntity::new, () -> IronShulkerBoxesBlocks.DIAMOND_SHULKER_BOX));
         registrar.Register("crystal_shulker_box", new IronShulkerBoxEntityFactory<>(CrystalShulkerBoxBlockEntity::new, () -> IronShulkerBoxesBlocks.CRYSTAL_SHULKER_BOX));
         registrar.Register("obsidian_shulker_box", new IronShulkerBoxEntityFactory<>(ObsidianShulkerBoxBlockEntity::new, () -> IronShulkerBoxesBlocks.OBSIDIAN_SHULKER_BOX));
+        registrar.Register("netherite_shulker_box", new IronShulkerBoxEntityFactory<>(NetheriteIronShulkerBoxBlockEntity::new, () -> IronShulkerBoxesBlocks.NETHERITE_SHULKER_BOX));
     }
 
     public static void InitializeFields(BlockEntityTypeRegistryFinalizedEvent event)
@@ -78,11 +81,13 @@ public final class IronShulkerBoxesBlockEntities
         DIAMOND_SHULKER_BOX = event.GetRegistryObjectChecked(IronShulkerBoxesModInstance.ID("diamond_shulker_box"));
         CRYSTAL_SHULKER_BOX = event.GetRegistryObjectChecked(IronShulkerBoxesModInstance.ID("crystal_shulker_box"));
         OBSIDIAN_SHULKER_BOX = event.GetRegistryObjectChecked(IronShulkerBoxesModInstance.ID("obsidian_shulker_box"));
+        NETHERITE_SHULKER_BOX = event.GetRegistryObjectChecked(IronShulkerBoxesModInstance.ID("netherite_shulker_box"));
         ITEM_REND_IRON_SHULKER_BOX = new IronShulkerBoxBlockEntity(BlockPos.ZERO, IronShulkerBoxesBlocks.IRON_SHULKER_BOX.defaultBlockState());
         ITEM_REND_COPPER_SHULKER_BOX = new CopperShulkerBoxBlockEntity(BlockPos.ZERO, IronShulkerBoxesBlocks.COPPER_SHULKER_BOX.defaultBlockState());
         ITEM_REND_GOLD_SHULKER_BOX = new GoldShulkerBoxBlockEntity(BlockPos.ZERO, IronShulkerBoxesBlocks.GOLD_SHULKER_BOX.defaultBlockState());
         ITEM_REND_CRYSTAL_SHULKER_BOX = new CrystalShulkerBoxBlockEntity(BlockPos.ZERO, IronShulkerBoxesBlocks.CRYSTAL_SHULKER_BOX.defaultBlockState());
         ITEM_REND_DIAMOND_SHULKER_BOX = new DiamondShulkerBoxBlockEntity(BlockPos.ZERO, IronShulkerBoxesBlocks.DIAMOND_SHULKER_BOX.defaultBlockState());
         ITEM_REND_OBSIDIAN_SHULKER_BOX = new ObsidianShulkerBoxBlockEntity(BlockPos.ZERO, IronShulkerBoxesBlocks.OBSIDIAN_SHULKER_BOX.defaultBlockState());
+        ITEM_REND_NETHERITE_SHULKER_BOX = new NetheriteIronShulkerBoxBlockEntity(BlockPos.ZERO, IronShulkerBoxesBlocks.NETHERITE_SHULKER_BOX.defaultBlockState());
     }
 }

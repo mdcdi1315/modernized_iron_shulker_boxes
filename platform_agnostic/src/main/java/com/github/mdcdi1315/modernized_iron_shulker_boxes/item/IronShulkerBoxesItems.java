@@ -23,6 +23,7 @@ public final class IronShulkerBoxesItems
     public static Item CRYSTAL_SHULKER_BOX;
     public static Item DIAMOND_SHULKER_BOX;
     public static Item OBSIDIAN_SHULKER_BOX;
+    public static Item NETHERITE_SHULKER_BOX;
 
     public static Item ResolveShulkerBoxItemByBlock(AbstractIronShulkerBoxBlock blk)
     {
@@ -33,6 +34,7 @@ public final class IronShulkerBoxesItems
             case CrystalShulkerBoxBlock c -> IronShulkerBoxesItems.CRYSTAL_SHULKER_BOX;
             case DiamondShulkerBoxBlock d -> IronShulkerBoxesItems.DIAMOND_SHULKER_BOX;
             case ObsidianShulkerBoxBlock o -> IronShulkerBoxesItems.OBSIDIAN_SHULKER_BOX;
+            case NetheriteShulkerBoxBlock n -> IronShulkerBoxesItems.NETHERITE_SHULKER_BOX;
             case null, default -> throw new InvalidOperationException("Attempted to create a non-existent item!!!");
         };
     }
@@ -71,6 +73,13 @@ public final class IronShulkerBoxesItems
                 (rl) -> new IronShulkerBoxUpgradeItem(
                         IronShulkerBoxesBlocks.DIAMOND_SHULKER_BOX,
                         IronShulkerBoxesBlocks.CRYSTAL_SHULKER_BOX
+                ),
+                IronShulkerBoxesCreativeModeTabs.IRON_SHULKER_BOXES
+        ));
+        registrar.Register("obsidian_to_netherite_shulker_box_upgrade", new ItemRegistrationInformation(
+                (rl) -> new IronShulkerBoxUpgradeItem(
+                        IronShulkerBoxesBlocks.OBSIDIAN_SHULKER_BOX,
+                        IronShulkerBoxesBlocks.NETHERITE_SHULKER_BOX
                 ),
                 IronShulkerBoxesCreativeModeTabs.IRON_SHULKER_BOXES
         ));

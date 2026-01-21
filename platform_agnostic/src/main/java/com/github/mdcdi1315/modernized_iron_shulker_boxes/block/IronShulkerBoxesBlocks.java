@@ -18,11 +18,12 @@ public final class IronShulkerBoxesBlocks
     private IronShulkerBoxesBlocks() {}
 
     public static IronShulkerBoxBlock IRON_SHULKER_BOX;
-    public static CopperShulkerBoxBlock COPPER_SHULKER_BOX;
     public static GoldShulkerBoxBlock GOLD_SHULKER_BOX;
-    public static ObsidianShulkerBoxBlock OBSIDIAN_SHULKER_BOX;
-    public static CrystalShulkerBoxBlock CRYSTAL_SHULKER_BOX;
+    public static CopperShulkerBoxBlock COPPER_SHULKER_BOX;
     public static DiamondShulkerBoxBlock DIAMOND_SHULKER_BOX;
+    public static CrystalShulkerBoxBlock CRYSTAL_SHULKER_BOX;
+    public static ObsidianShulkerBoxBlock OBSIDIAN_SHULKER_BOX;
+    public static NetheriteShulkerBoxBlock NETHERITE_SHULKER_BOX;
 
     public static void Initialize(IBlockRegistrar registrar)
     {
@@ -61,6 +62,12 @@ public final class IronShulkerBoxesBlocks
                 IronShulkerBoxesBlocks::ItemGetter,
                 IronShulkerBoxesCreativeModeTabs.IRON_SHULKER_BOXES
         ));
+
+        registrar.Register("netherite_shulker_box", new BlockRegistrationInformation(
+                (rl) -> NETHERITE_SHULKER_BOX = new NetheriteShulkerBoxBlock(BlockBehaviour.Properties.of()),
+                IronShulkerBoxesBlocks::ItemGetter,
+                IronShulkerBoxesCreativeModeTabs.IRON_SHULKER_BOXES
+        ));
     }
 
     private static Item ItemGetter(Block b , ResourceLocation location) {
@@ -86,6 +93,9 @@ public final class IronShulkerBoxesBlocks
         } else if (b instanceof ObsidianShulkerBoxBlock) {
             builder.WithBlockEntityRenderingFunction(() -> IronShulkerBoxesBlockEntities.ITEM_REND_OBSIDIAN_SHULKER_BOX);
             result = IronShulkerBoxesItems.OBSIDIAN_SHULKER_BOX = builder.Build();
+        } else if (b instanceof NetheriteShulkerBoxBlock) {
+            builder.WithBlockEntityRenderingFunction(() -> IronShulkerBoxesBlockEntities.ITEM_REND_NETHERITE_SHULKER_BOX);
+            result = IronShulkerBoxesItems.NETHERITE_SHULKER_BOX = builder.Build();
         }
         return result;
     }

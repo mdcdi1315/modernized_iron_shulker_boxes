@@ -41,7 +41,6 @@ public abstract class AbstractIronShulkerBoxBlockEntity
     private static final byte IMPLICIT_CLOSING_DELAY = 9;
 
     private int openCount;
-    private final int[] slots;
     private AnimationStatus animationStatus;
     private NonNullList<ItemStack> itemStacks;
 
@@ -51,21 +50,18 @@ public abstract class AbstractIronShulkerBoxBlockEntity
     private byte closing_delay;
     private boolean close_sound_not_played;
 
-    public AbstractIronShulkerBoxBlockEntity(BlockEntityType<?> typeIn, BlockPos blockPos, BlockState blockState, IronShulkerBoxesTypes shulkerBoxTypeIn) {
+    public AbstractIronShulkerBoxBlockEntity(BlockEntityType<?> typeIn, BlockPos blockPos, BlockState blockState, IronShulkerBoxesTypes shulkerBoxTypeIn)
+    {
         super(typeIn, blockPos, blockState);
 
         this.animationStatus = AnimationStatus.CLOSED;
-        this.slots = new int[shulkerBoxTypeIn.size];
-        for (int I = 0; I < slots.length; I++) { slots[I] = I; }
-        // The above is much faster than using this: this.slots = IntStream.range(0, shulkerBoxTypeIn.size).toArray();
         this.itemStacks = NonNullList.withSize(shulkerBoxTypeIn.size, ItemStack.EMPTY);
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, AbstractIronShulkerBoxBlockEntity pBlockEntity) {
-        pBlockEntity.updateAnimation(pLevel, pPos, pState);
-    }
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, AbstractIronShulkerBoxBlockEntity pBlockEntity) { pBlockEntity.updateAnimation(pLevel, pPos, pState); }
 
-    protected void updateAnimation(Level level, BlockPos pos, BlockState state) {
+    private void updateAnimation(Level level, BlockPos pos, BlockState state)
+    {
         this.progressOld = this.progress;
         switch (this.animationStatus) {
             case CLOSED:
@@ -112,18 +108,16 @@ public abstract class AbstractIronShulkerBoxBlockEntity
         }
     }
 
-    public AnimationStatus getAnimationStatus() {
-        return this.animationStatus;
-    }
+    public AnimationStatus getAnimationStatus() { return this.animationStatus; }
 
     public AABB getBoundingBox(BlockState pState) {
         return Shulker.getProgressAabb(1f, pState.getValue(AbstractIronShulkerBoxBlock.FACING), 0.5F * this.getProgress(1.0F));
     }
 
-    private void moveCollidedEntities(Level pLevel, BlockPos pPos, BlockState pState)
+    private void moveCollidedEntities(Level pLevel, BlockPos pPos, BlockState state)
     {
-        if (pState.getBlock() instanceof AbstractIronShulkerBoxBlock) {
-            Direction direction = pState.getValue(AbstractIronShulkerBoxBlock.FACING);
+        if (state.getBlock() instanceof AbstractIronShulkerBoxBlock) {
+            Direction direction = state.getValue(AbstractIronShulkerBoxBlock.FACING);
             AABB aabb = Shulker.getProgressDeltaAabb(1f, direction, this.progressOld , this.progress).move(pPos);
             List<Entity> list = pLevel.getEntities(null, aabb);
 
@@ -141,21 +135,19 @@ public abstract class AbstractIronShulkerBoxBlockEntity
     * Returns the number of slots in the inventory.
     */
     @Override
-    public int getContainerSize() {
-        return this.itemStacks.size();
-    }
+    public int getContainerSize() { return this.itemStacks.size(); }
 
     @Override
-    public boolean triggerEvent(int pId, int pType) {
+    public boolean triggerEvent(int pId, int pType)
+    {
         if (pId == 1) {
-            this.openCount = pType;
-            if (pType == 0) {
+            if ((this.openCount = pType) == 0) {
                 this.animationStatus = AnimationStatus.CLOSING;
                 OnClosing();
                 // doNeighborUpdates(this.getLevel(), this.worldPosition, this.getBlockState());
             }
 
-            if (pType == 1) {
+            if (this.openCount == 1) {
                 this.animationStatus = AnimationStatus.OPENING;
                 OnOpening();
                 // doNeighborUpdates(this.getLevel(), this.worldPosition, this.getBlockState());
@@ -166,6 +158,8 @@ public abstract class AbstractIronShulkerBoxBlockEntity
             return super.triggerEvent(pId, pType);
         }
     }
+
+    protected void OnLoad() {}
 
     protected void OnOpening() {}
 
@@ -219,6 +213,7 @@ public abstract class AbstractIronShulkerBoxBlockEntity
         if (!tryLoadLootTable(tag)) {
             LoadBlockEntityData(tag, provider);
         }
+        OnLoad();
     }
 
     @Override
@@ -258,7 +253,13 @@ public abstract class AbstractIronShulkerBoxBlockEntity
     }
 
     @Override
-    public int[] getSlotsForFace(Direction pSide) { return this.slots; }
+    public int[] getSlotsForFace(Direction pSide)
+    {
+        int[] slots = new int[itemStacks.size()];
+        int I = 0;
+        while (I < slots.length) { slots[I] = I++; }
+        return slots;
+    }
 
    /**
     * Returns {@code true} if automation can insert the given item in the given slot from the given side.

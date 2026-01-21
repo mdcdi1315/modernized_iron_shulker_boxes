@@ -19,6 +19,7 @@ public final class IronShulkerBoxesMenuTypes
     public static MenuType<DiamondShulkerBoxMenu> DIAMOND_SHULKER_BOX;
     public static MenuType<CrystalShulkerBoxMenu> CRYSTAL_SHULKER_BOX;
     public static MenuType<ObsidianShulkerBoxMenu> OBSIDIAN_SHULKER_BOX;
+    public static MenuType<NetheriteShulkerBoxMenu> NETHERITE_SHULKER_BOX;
 
     public static void Initialize(IMenuTypeRegistrar registrar)
     {
@@ -51,6 +52,11 @@ public final class IronShulkerBoxesMenuTypes
                 FeatureFlags.VANILLA_SET,
                 ObsidianShulkerBoxMenu::CreateMenuDirect
         ));
+
+        registrar.Register("netherite_shulker_box_menu", new MenuTypeRegistrationInfo<>(
+                FeatureFlags.VANILLA_SET,
+                NetheriteShulkerBoxMenu::CreateMenuDirect
+        ));
     }
 
     public static void InitializeFields(MenuTypeRegistryFinalizedEvent event) {
@@ -60,5 +66,6 @@ public final class IronShulkerBoxesMenuTypes
         DIAMOND_SHULKER_BOX = event.GetRegistryObjectChecked(IronShulkerBoxesModInstance.ID("diamond_shulker_box_menu"));
         CRYSTAL_SHULKER_BOX = event.GetRegistryObjectChecked(IronShulkerBoxesModInstance.ID("crystal_shulker_box_menu"));
         OBSIDIAN_SHULKER_BOX = event.GetRegistryObjectChecked(IronShulkerBoxesModInstance.ID("obsidian_shulker_box_menu"));
+        NETHERITE_SHULKER_BOX = event.GetRegistryObjectChecked(IronShulkerBoxesModInstance.ID("netherite_shulker_box_menu"));
     }
 }

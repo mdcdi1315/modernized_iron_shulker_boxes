@@ -14,23 +14,22 @@ public enum IronShulkerBoxesTypes
 {
     IRON(54, 9, 184, 222, IronShulkerBoxesModInstance.ID("textures/gui/iron_container.png"), 256, 256),
     GOLD(81, 9, 184, 276, IronShulkerBoxesModInstance.ID("textures/gui/gold_container.png"), 256, 276),
-    DIAMOND(108, 12, 238, 276, IronShulkerBoxesModInstance.ID("textures/gui/diamond_container.png"), 256, 276),
     COPPER(45, 9, 184, 204, IronShulkerBoxesModInstance.ID("textures/gui/copper_container.png"), 256, 256),
+    DIAMOND(108, 12, 238, 276, IronShulkerBoxesModInstance.ID("textures/gui/diamond_container.png"), 256, 276),
     CRYSTAL(108, 12, 238, 276, IronShulkerBoxesModInstance.ID("textures/gui/diamond_container.png"), 256, 276),
     OBSIDIAN(132, 12, 238, 312, IronShulkerBoxesModInstance.ID("textures/gui/obsidian_container.png"), 256, 384),
+    NETHERITE(169, 13, 256, 348, IronShulkerBoxesModInstance.ID("textures/gui/netherite_container.png"), 256, 384),
     VANILLA(0, 0, 0, 0, ResourceLocation.tryBuild(ResourceLocation.DEFAULT_NAMESPACE,"textures/gui/container/shulker_box.png"), 0, 0);
 
-    private final String name;
     public final int size;
     public final int rowLength; // The number of item stacks presented in a single row.
     public final int xSize; // The row pixels actually used by the texture.
     public final int ySize; // The column pixels actually used by the texture.
-    public final ResourceLocation guiTexture;
-    public final int textureXSize;
-    public final int textureYSize;
+    public final ResourceLocation guiTexture; // The texture to be used for the screen
+    public final int textureXSize; // The actual texture width.
+    public final int textureYSize; // The actual texture height.
 
     IronShulkerBoxesTypes(int size, int rowLength, int xSize, int ySize, ResourceLocation guiTexture, int textureXSize, int textureYSize) {
-        this.name = this.name();
         this.size = size;
         this.rowLength = rowLength;
         this.xSize = xSize;
@@ -40,18 +39,10 @@ public enum IronShulkerBoxesTypes
         this.textureYSize = textureYSize;
     }
 
-    public String getId() {
-    return this.name().toLowerCase(Locale.ROOT);
-  }
-
-    public String getEnglishName() {
-    return this.name;
-  }
+    public String getId() { return this.name().toLowerCase(Locale.ROOT); }
 
     @Override
-    public String getSerializedName() {
-    return this.getEnglishName();
-  }
+    public String getSerializedName() { return this.name(); }
 
     public int getRowCount() { return this.size / this.rowLength; }
 
@@ -66,6 +57,7 @@ public enum IronShulkerBoxesTypes
                 case CRYSTAL -> IronShulkerBoxesBlocks.CRYSTAL_SHULKER_BOX.defaultBlockState();
                 case COPPER -> IronShulkerBoxesBlocks.COPPER_SHULKER_BOX.defaultBlockState();
                 case OBSIDIAN -> IronShulkerBoxesBlocks.OBSIDIAN_SHULKER_BOX.defaultBlockState();
+                case NETHERITE -> IronShulkerBoxesBlocks.NETHERITE_SHULKER_BOX.defaultBlockState();
                 default -> Blocks.SHULKER_BOX.defaultBlockState();
             };
         } else {
@@ -76,6 +68,7 @@ public enum IronShulkerBoxesTypes
                 case CRYSTAL -> IronShulkerBoxesBlocks.CRYSTAL_SHULKER_BOX.defaultBlockState().setValue(AbstractIronShulkerBoxBlock.COLOR , color);
                 case COPPER -> IronShulkerBoxesBlocks.COPPER_SHULKER_BOX.defaultBlockState().setValue(AbstractIronShulkerBoxBlock.COLOR , color);
                 case OBSIDIAN -> IronShulkerBoxesBlocks.OBSIDIAN_SHULKER_BOX.defaultBlockState().setValue(AbstractIronShulkerBoxBlock.COLOR , color);
+                case NETHERITE -> IronShulkerBoxesBlocks.NETHERITE_SHULKER_BOX.defaultBlockState().setValue(AbstractIronShulkerBoxBlock.COLOR, color);
                 default -> switch (color) {
                     case NONE -> null;
                     case WHITE -> Blocks.WHITE_SHULKER_BOX.defaultBlockState();
