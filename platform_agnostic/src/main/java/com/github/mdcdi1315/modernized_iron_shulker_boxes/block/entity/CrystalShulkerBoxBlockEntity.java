@@ -5,7 +5,6 @@ import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.NotNull;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.menu.CrystalShulkerBoxMenu;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
 
-import net.minecraft.nbt.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.level.Level;
@@ -54,6 +53,9 @@ public final class CrystalShulkerBoxBlockEntity
     }
 
     @Override
+    protected void OnLoad() { inventory_touched = true; }
+
+    @Override
     protected void OnClosing() { inventory_touched = true; }
 
     @Override
@@ -67,11 +69,6 @@ public final class CrystalShulkerBoxBlockEntity
             this.top_stacks.set(I , (I < top_stacks.size()) ? top_stacks.get(I) : ItemStack.EMPTY);
             I++;
         }
-    }
-
-    @Override
-    protected void OnLoad() {
-        inventory_touched = true;
     }
 
     @Override
@@ -104,7 +101,5 @@ public final class CrystalShulkerBoxBlockEntity
     }
 
     @Override
-    public boolean HasTransparentSides() {
-        return GetShulkerBoxType().isTransparent();
-    }
+    public boolean HasTransparentSides() { return GetShulkerBoxType().IsTransparent(); }
 }

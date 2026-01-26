@@ -6,24 +6,21 @@ import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity.IronShulk
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class CopperShulkerBoxBlock
         extends AbstractIronShulkerBoxBlock
 {
-    public CopperShulkerBoxBlock(Properties properties) {
-        super(properties, IronShulkerBoxesTypes.COPPER, () -> IronShulkerBoxesBlockEntities.COPPER_SHULKER_BOX);
-    }
+    public CopperShulkerBoxBlock(Properties properties) { super(properties, IronShulkerBoxesTypes.COPPER); }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new CopperShulkerBoxBlockEntity(pos, state);
-    }
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) { return new CopperShulkerBoxBlockEntity(pos, state); }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CreateMapCodecForIronShulkerBlock(CrystalShulkerBoxBlock::new);
-    }
+    protected MapCodec<CopperShulkerBoxBlock> codec() { return CreateMapCodecForIronShulkerBlock(CopperShulkerBoxBlock::new); }
+
+    @Override
+    public BlockEntityType<CopperShulkerBoxBlockEntity> GetBlockEntityType() { return IronShulkerBoxesBlockEntities.COPPER_SHULKER_BOX; }
 }

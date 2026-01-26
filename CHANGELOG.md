@@ -1,11 +1,10 @@
+### Releasing Version 1 Release Candidate 3:
 
+-> Some additional code optimizations!
 
-### Releasing Version 1 Release Candidate 2:
+-> Fixed the Netherite Shulker Box textures!
 
--> Fixes most of the bugs!
+Note: If no other critical bugs are found the mod will become stable.
 
--> Memory footprint for the inventory slots is now eliminated and the slots array will be created on the fly when and once needed.
-
--> The Crystal Shulker Box renderer is now moved to its own class so that the rendering loop becomes a bit faster
-
--> Added the Netherite Shulker Box!
+The bug that the crystal shulker box top stacks are not loaded when transitioning from a dimension to the Overworld is known.
+However, it seems to be caused by performance optimization mods, because in the development environment it does correctly load.

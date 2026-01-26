@@ -111,7 +111,7 @@ public abstract class AbstractIronShulkerBoxBlockEntity
     public AnimationStatus getAnimationStatus() { return this.animationStatus; }
 
     public AABB getBoundingBox(BlockState pState) {
-        return Shulker.getProgressAabb(1f, pState.getValue(AbstractIronShulkerBoxBlock.FACING), 0.5F * this.getProgress(1.0F));
+        return Shulker.getProgressAabb(1f, pState.getValue(AbstractIronShulkerBoxBlock.FACING), 0.5F * this.GetProgress(1.0F));
     }
 
     private void moveCollidedEntities(Level pLevel, BlockPos pPos, BlockState state)
@@ -200,42 +200,27 @@ public abstract class AbstractIronShulkerBoxBlockEntity
     }
 
     @Override
-    protected Component getDefaultName() {
-        return getBlockState().getBlock().getName();
-    }
+    protected Component getDefaultName() { return getBlockState().getBlock().getName(); }
 
     @Override
-    public final void loadAdditional(CompoundTag tag, HolderLookup.Provider provider)
+    public final void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
-        super.loadAdditional(tag, provider);
-        this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        super.loadAdditional(tag, registries);
 
-        if (!tryLoadLootTable(tag)) {
-            LoadBlockEntityData(tag, provider);
+        if (!tryLoadLootTable(tag) && tag.contains("Items", CompoundTag.TAG_LIST)) {
+            ContainerHelper.loadAllItems(tag, this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY), registries);
         }
         OnLoad();
     }
 
     @Override
-    protected final void saveAdditional(CompoundTag pTag, HolderLookup.Provider provider)
+    protected final void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
-        super.saveAdditional(pTag, provider);
+        super.saveAdditional(tag, registries);
 
-        if (!this.trySaveLootTable(pTag)) {
-            SaveBlockEntityData(pTag, provider);
+        if (!this.trySaveLootTable(tag)) {
+            ContainerHelper.saveAllItems(tag, this.itemStacks, registries);
         }
-    }
-
-    protected void LoadBlockEntityData(CompoundTag tag , HolderLookup.Provider registries)
-    {
-        if (tag.contains("Items", CompoundTag.TAG_LIST)) {
-            ContainerHelper.loadAllItems(tag, this.itemStacks, registries);
-        }
-    }
-
-    protected void SaveBlockEntityData(CompoundTag tag , HolderLookup.Provider registries)
-    {
-        ContainerHelper.saveAllItems(tag, this.itemStacks, registries);
     }
 
     @Override
@@ -275,23 +260,18 @@ public abstract class AbstractIronShulkerBoxBlockEntity
     @Override
     public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) { return true; }
 
-    public float getProgress(float pPartialTicks) {
-        return Extensions.Lerp(pPartialTicks, this.progressOld, this.progress);
-    }
+    public float GetProgress(float pPartialTicks) { return Extensions.Lerp(pPartialTicks, this.progressOld, this.progress); }
 
-    public boolean isClosed() {
-        return this.animationStatus == AnimationStatus.CLOSED;
-    }
+    public boolean IsClosed() { return this.animationStatus == AnimationStatus.CLOSED; }
 
-    public IronShulkerBoxesTypes GetShulkerBoxType() {
+    public IronShulkerBoxesTypes GetShulkerBoxType()
+    {
         IronShulkerBoxesTypes type = IronShulkerBoxesTypes.IRON;
 
         if (this.hasLevel()) {
             IronShulkerBoxesTypes typeNew = AbstractIronShulkerBoxBlock.getTypeFromBlock(this.getBlockState().getBlock());
 
-            if (typeNew != null) {
-                type = typeNew;
-            }
+            if (typeNew != null) { type = typeNew; }
         }
 
         return type;

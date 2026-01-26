@@ -66,8 +66,8 @@ public class IronShulkerBoxRenderer<T extends AbstractIronShulkerBoxBlockEntity>
             poseStack.scale(1.0F, -1.0F, -1.0F);
             poseStack.translate(0.0F, -1.0F, 0.0F);
             ModelPart modelpart = this.model.getLid();
-            modelpart.setPos(0.0F, 24.0F - tileEntityIn.getProgress(partialTicks) * 0.5F * 16.0F, 0.0F);
-            modelpart.yRot = 270.0F * tileEntityIn.getProgress(partialTicks) * ((float) Math.PI / 180F);
+            modelpart.setPos(0.0F, 24.0F - tileEntityIn.GetProgress(partialTicks) * 0.5F * 16.0F, 0.0F);
+            modelpart.yRot = 270.0F * tileEntityIn.GetProgress(partialTicks) * ((float) Math.PI / 180F);
             this.model.renderToBuffer(poseStack, material.buffer(bufferSource, RenderType::entityCutoutNoCull), combinedLightIn, combinedOverlayIn); //  1.0F, 1.0F, 1.0F, 1.0F
         } finally {
             poseStack.popPose(); // POSE POP UNSAFE END

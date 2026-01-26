@@ -46,7 +46,7 @@ public enum IronShulkerBoxesTypes
 
     public int getRowCount() { return this.size / this.rowLength; }
 
-    public boolean isTransparent() { return this == CRYSTAL; }
+    public boolean IsTransparent() { return this == CRYSTAL; }
 
     public static BlockState get(IronShulkerBoxesTypes type, IronShulkerBoxColor color) {
         if (color == null) {

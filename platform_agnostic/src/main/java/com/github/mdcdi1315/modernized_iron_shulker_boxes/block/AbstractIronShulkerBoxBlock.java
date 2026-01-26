@@ -2,29 +2,23 @@ package com.github.mdcdi1315.modernized_iron_shulker_boxes.block;
 
 import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.MaybeNull;
 
-import com.github.mdcdi1315.DotNetLayer.System.Func1;
 import com.github.mdcdi1315.basemodslib.codecs.CodecUtils;
 
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxItem;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesModInstance;
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxUpgradeItem;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity.AbstractIronShulkerBoxBlockEntity;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.datacomponent.IronShulkerBoxColorDataComponentType;
 
-import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxUpgradeItem;
 import com.google.common.collect.Maps;
 
 import com.mojang.serialization.MapCodec;
 
-import it.unimi.dsi.fastutil.objects.Reference2ObjectArrayMap;
-import net.minecraft.Util;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -43,6 +37,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -58,10 +53,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
-import java.util.Map;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -69,26 +61,27 @@ public abstract class AbstractIronShulkerBoxBlock
         extends BaseEntityBlock
 {
     private static final Component UNKNOWN_CONTENTS = Component.translatable("container.shulkerBox.unknownContents");
-    private static final VoxelShape UP_OPEN_AABB = Block.box(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-    private static final VoxelShape DOWN_OPEN_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
-    private static final VoxelShape WEST_OPEN_AABB = Block.box(0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D);
-    private static final VoxelShape EAST_OPEN_AABB = Block.box(15.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-    private static final VoxelShape NORTH_OPEN_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 1.0D);
-    private static final VoxelShape SOUTH_OPEN_AABB = Block.box(0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D);
-    private static final Map<Direction, VoxelShape> OPEN_SHAPE_BY_DIRECTION = Util.make(Maps.newEnumMap(Direction.class), (p_258974_) -> {
-        p_258974_.put(Direction.NORTH, NORTH_OPEN_AABB);
-        p_258974_.put(Direction.EAST, EAST_OPEN_AABB);
-        p_258974_.put(Direction.SOUTH, SOUTH_OPEN_AABB);
-        p_258974_.put(Direction.WEST, WEST_OPEN_AABB);
-        p_258974_.put(Direction.UP, UP_OPEN_AABB);
-        p_258974_.put(Direction.DOWN, DOWN_OPEN_AABB);
-    });
+    private static final Map<Direction, VoxelShape> OPEN_SHAPE_BY_DIRECTION = CreateOpenShapeByDirection();
+
     public static final EnumProperty<Direction> FACING = DirectionalBlock.FACING;
-    public static final Property<IronShulkerBoxColor> COLOR = new IronShulkerBoxColorProperty("isb_color");
     public static final ResourceLocation CONTENTS = IronShulkerBoxesModInstance.ID("contents");
+    public static final Property<IronShulkerBoxColor> COLOR = new IronShulkerBoxColorProperty("isb_color");
 
     private final IronShulkerBoxesTypes type;
-    protected final Func1<BlockEntityType<? extends AbstractIronShulkerBoxBlockEntity>> block_ent_type;
+
+    private static Map<Direction, VoxelShape> CreateOpenShapeByDirection()
+    {
+        Map<Direction, VoxelShape> m = Maps.newEnumMap(Direction.class);
+        m.put(Direction.NORTH, Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 1.0D)); // NORTH_OPEN_AABB
+        m.put(Direction.EAST, Block.box(15.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)); // EAST_OPEN_AABB
+        m.put(Direction.SOUTH, Block.box(0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D)); // SOUTH_OPEN_AABB
+        m.put(Direction.WEST, Block.box(0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D)); // WEST_OPEN_AABB
+        m.put(Direction.UP, Block.box(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D)); // UP_OPEN_AABB
+        m.put(Direction.DOWN, Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D)); // DOWN_OPEN_AABB
+        return m;
+    }
+
+    protected static <T extends AbstractIronShulkerBoxBlock> MapCodec<T> CreateMapCodecForIronShulkerBlock(Function<Properties, T> constructor) { return CodecUtils.CreateMapCodecDirect(propertiesCodec(), constructor); }
 
     private record SuffocatingViewBlockingPredicate()
         implements StatePredicate
@@ -101,7 +94,7 @@ public abstract class AbstractIronShulkerBoxBlock
         public boolean test(BlockState state, BlockGetter getter, BlockPos position)
         {
             if (getter.getBlockEntity(position) instanceof AbstractIronShulkerBoxBlockEntity entity) {
-                return entity.isClosed();
+                return entity.IsClosed();
             } else {
                 return true;
             }
@@ -121,8 +114,7 @@ public abstract class AbstractIronShulkerBoxBlock
 
     public AbstractIronShulkerBoxBlock(
             Properties properties,
-            IronShulkerBoxesTypes type,
-            Func1<BlockEntityType<? extends AbstractIronShulkerBoxBlockEntity>> type_getter
+            IronShulkerBoxesTypes type
     ) {
         super(properties
                 .forceSolidOn()
@@ -135,19 +127,21 @@ public abstract class AbstractIronShulkerBoxBlock
         );
 
         this.type = type;
-        this.block_ent_type = type_getter;
 
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP).setValue(COLOR , IronShulkerBoxColor.NONE));
     }
 
-    protected final <T extends AbstractIronShulkerBoxBlock> MapCodec<T> CreateMapCodecForIronShulkerBlock(Function<Properties, T> constructor) {
-        return CodecUtils.CreateMapCodecDirect(propertiesCodec(), constructor);
-    }
+    /**
+     * Method for getting the block entity type directly. <br />
+     * Avoids to store the function to the block entity itself, which it might be computationally expensive.
+     * @return The block entity type for the current iron shulker box block.
+     */
+    public abstract BlockEntityType<? extends AbstractIronShulkerBoxBlockEntity> GetBlockEntityType();
 
     @Override
     @MaybeNull
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> server_block_entity) {
-        return createTickerHelper(server_block_entity, this.block_ent_type.function(), AbstractIronShulkerBoxBlockEntity::tick);
+        return createTickerHelper(server_block_entity, GetBlockEntityType(), AbstractIronShulkerBoxBlockEntity::tick);
     }
 
    /**
@@ -159,47 +153,41 @@ public abstract class AbstractIronShulkerBoxBlock
     */
     @Override
     @Deprecated
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
-    }
+    public RenderShape getRenderShape(BlockState state) { return RenderShape.ENTITYBLOCK_ANIMATED; }
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (stack.getItem() instanceof IronShulkerBoxUpgradeItem) {
-            return ItemInteractionResult.FAIL;
-        } else {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        }
+        return (stack.getItem() instanceof IronShulkerBoxUpgradeItem) ? ItemInteractionResult.FAIL : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
+    {
         if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else if (player.isSpectator()) {
             return InteractionResult.CONSUME;
-        } else {
-            if (level.getBlockEntity(pos) instanceof AbstractIronShulkerBoxBlockEntity ironShulkerBoxBlockEntity) {
-                if (CanOpen(state, level, pos, ironShulkerBoxBlockEntity)) {
-                    player.openMenu(ironShulkerBoxBlockEntity);
-                    player.awardStat(Stats.OPEN_SHULKER_BOX);
-                    PiglinAi.angerNearbyPiglins(player, true);
-                }
-
-                return InteractionResult.CONSUME;
-            } else {
-                return InteractionResult.PASS;
+        } else if (level.getBlockEntity(pos) instanceof AbstractIronShulkerBoxBlockEntity block_ent) {
+            if (CanOpen(state, level, pos, block_ent)) {
+                player.openMenu(block_ent);
+                player.awardStat(Stats.OPEN_SHULKER_BOX);
+                PiglinAi.angerNearbyPiglins(player, true);
             }
+
+            return InteractionResult.CONSUME;
+        } else {
+            return InteractionResult.PASS;
         }
     }
 
-    private static boolean CanOpen(BlockState pState, Level pLevel, BlockPos pPos, AbstractIronShulkerBoxBlockEntity pBlockEntity) {
-        if (pBlockEntity.getAnimationStatus() != AbstractIronShulkerBoxBlockEntity.AnimationStatus.CLOSED) {
-            return true;
-        } else {
-            AABB aabb = Shulker.getProgressDeltaAabb(1F, pState.getValue(FACING), 0.0F,0.5F).move(pPos).deflate(1.0E-6D);
-            return pLevel.noCollision(aabb);
-        }
+    private static boolean CanOpen(BlockState pState, Level pLevel, BlockPos pPos, AbstractIronShulkerBoxBlockEntity pBlockEntity)
+    {
+        return pBlockEntity.getAnimationStatus() != AbstractIronShulkerBoxBlockEntity.AnimationStatus.CLOSED || pLevel.noCollision(
+                Shulker
+                        .getProgressDeltaAabb(1F, pState.getValue(FACING), 0.0F, 0.5F)
+                        .move(pPos)
+                        .deflate(1.0E-6D)
+        );
     }
 
     @Override
@@ -261,8 +249,7 @@ public abstract class AbstractIronShulkerBoxBlock
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @MaybeNull LivingEntity placer, ItemStack item_stack)
     {
-        var cn = item_stack.get(DataComponents.CUSTOM_NAME);
-        if (cn != null && level.getBlockEntity(pos) instanceof AbstractIronShulkerBoxBlockEntity ent)
+        if (item_stack.get(DataComponents.CUSTOM_NAME) != null && level.getBlockEntity(pos) instanceof AbstractIronShulkerBoxBlockEntity ent)
         {
             ent.setComponents(
                     DataComponentMap.builder()
@@ -314,7 +301,7 @@ public abstract class AbstractIronShulkerBoxBlock
 
     @Override
     public VoxelShape getBlockSupportShape(BlockState state, BlockGetter getter, BlockPos pos) {
-        if (getter.getBlockEntity(pos) instanceof AbstractIronShulkerBoxBlockEntity entity && !entity.isClosed()) {
+        if (getter.getBlockEntity(pos) instanceof AbstractIronShulkerBoxBlockEntity entity && !entity.IsClosed()) {
             return OPEN_SHAPE_BY_DIRECTION.get(state.getValue(FACING).getOpposite());
         } else {
             return Shapes.block();
@@ -349,10 +336,11 @@ public abstract class AbstractIronShulkerBoxBlock
     }
 
     @Override
-    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state)
+    {
         ItemStack itemstack = super.getCloneItemStack(level, pos, state);
 
-        Optional<? extends AbstractIronShulkerBoxBlockEntity> opt = level.getBlockEntity(pos, this.block_ent_type.function());
+        Optional<? extends AbstractIronShulkerBoxBlockEntity> opt = level.getBlockEntity(pos, GetBlockEntityType());
         if (opt.isPresent()) {
             opt.get().saveToItem(itemstack , level.registryAccess());
         }
@@ -360,10 +348,10 @@ public abstract class AbstractIronShulkerBoxBlock
     }
 
     public static IronShulkerBoxesTypes getTypeFromBlock(Block blockIn) {
-        return blockIn instanceof AbstractIronShulkerBoxBlock b ? b.getType() : IronShulkerBoxesTypes.VANILLA;
+        return blockIn instanceof AbstractIronShulkerBoxBlock b ? b.GetType() : IronShulkerBoxesTypes.VANILLA;
     }
 
-    public IronShulkerBoxesTypes getType() { return this.type; }
+    public IronShulkerBoxesTypes GetType() { return this.type; }
 
    /**
     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
