@@ -119,6 +119,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
     mainFile.addRequirement("mdcdi1315-base-lib")
     project.minecraft_versions.split(',').toList().each { mainFile.addGameVersion(it) }
     mainFile.releaseType = curseforge_release_type
+    mainFile.addEnvironment("Client", "Server")
     mainFile.addModLoader("Forge")
 }
 

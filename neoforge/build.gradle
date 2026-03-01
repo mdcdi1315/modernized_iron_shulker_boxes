@@ -67,6 +67,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
     project.minecraft_versions.split(',').toList().each { mainFile.addGameVersion(it) }
     mainFile.releaseType = curseforge_release_type
     mainFile.addModLoader("NeoForge");
+    mainFile.addEnvironment("Client", "Server")
     mainFile.addRequirement("mdcdi1315-base-lib")
 }
 
