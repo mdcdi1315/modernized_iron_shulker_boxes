@@ -44,6 +44,7 @@ public final class IronShulkerBoxUpgradeItem
     public InteractionResult useOn(UseOnContext context)
     {
         Level lv = context.getLevel();
+        Player actor = context.getPlayer();
         BlockPos position = context.getClickedPos();
         if (lv.getBlockEntity(position) instanceof AbstractIronShulkerBoxBlockEntity source_data)
         {
@@ -52,7 +53,6 @@ public final class IronShulkerBoxUpgradeItem
                 if (lv.isClientSide) {
                     // We are on client-side, send success instead.
                     // The code to execute is otherwise server-side only.
-                    Player actor = context.getPlayer();
                     if (actor != null) {
                         context.getItemInHand().consume(1 , actor);
                     }
@@ -61,6 +61,13 @@ public final class IronShulkerBoxUpgradeItem
                     return UseItem_Server(context, bs, source_data);
                 }
             } else {
+                if (lv.isClientSide && actor != null)
+                {
+                    actor.displayClientMessage(
+                            Component.translatable("modernized_iron_shulker_boxes.upgrading.error.invalid_block", bs.getBlock().getName(), source.getName()).withColor(0xfffd0101), // A bit less than red.
+                            true
+                    );
+                }
                 return InteractionResult.FAIL;
             }
         } else {

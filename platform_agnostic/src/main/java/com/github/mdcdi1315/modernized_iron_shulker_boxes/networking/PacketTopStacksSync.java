@@ -1,9 +1,9 @@
 package com.github.mdcdi1315.modernized_iron_shulker_boxes.networking;
 
+import com.github.mdcdi1315.basemodslib.network.NetworkHelpers;
+
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesModInstance;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity.ICrystalShulkerBoxBlockEntityDetails;
-
-import com.google.common.collect.Lists;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.client.Minecraft;
@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public final class PacketTopStacksSync
     implements CustomPacketPayload
@@ -36,9 +37,9 @@ public final class PacketTopStacksSync
         @Override
         public PacketTopStacksSync decode(RegistryFriendlyByteBuf buffer)
         {
-            BlockPos blockPos = buffer.readBlockPos();
-            int size = buffer.readInt();
-            List<ItemStack> topItemStacks = Lists.newArrayListWithExpectedSize(size);
+            BlockPos blockPos = NetworkHelpers.ReadDerivedVec3iUnsafe(buffer, BlockPos::new);
+            int size = NetworkHelpers.Read7BitEncodedIntUnsafe(buffer);
+            List<ItemStack> topItemStacks = new ArrayList<>(size);
 
             for (int item = 0; item < size; item++) {
                 topItemStacks.add(buffer.readJsonWithCodec(ItemStack.CODEC));
@@ -50,9 +51,8 @@ public final class PacketTopStacksSync
         @Override
         public void encode(RegistryFriendlyByteBuf buffer, PacketTopStacksSync packet)
         {
-            buffer.writeBlockPos(packet.blockPos);
-            int size = packet.topItemStacks.size();
-            buffer.writeInt(size);
+            NetworkHelpers.WriteVec3iUnsafe(buffer, packet.blockPos);
+            NetworkHelpers.Write7BitEncodedIntUnsafe(buffer, packet.topItemStacks.size());
 
             for (ItemStack is : packet.topItemStacks) {
                 buffer.writeJsonWithCodec(ItemStack.CODEC , is);

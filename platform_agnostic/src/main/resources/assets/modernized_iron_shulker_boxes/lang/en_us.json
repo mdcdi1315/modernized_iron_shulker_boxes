@@ -38,6 +38,7 @@
   	"modernized_iron_shulker_boxes.upgrading.shulker_box_upgrade.color": "The color of the Shulker Box will stay the same.",
   	"modernized_iron_shulker_boxes.upgrading.shulker_box_upgrade.upgrade": "Used to upgrade a %s to a %s.",
 	"modernized_iron_shulker_boxes.upgrading.vanilla_shulker_box_upgrade.upgrade": "Used to upgrade a vanilla Shulker Box to a %s.",
+	"modernized_iron_shulker_boxes.upgrading.error.invalid_block": "This item cannot be used to upgrade a '%s'; it must be applied to a '%s' instead.",
   	"item.modernized_iron_shulker_boxes.vanilla_to_copper_shulker_box_upgrade": "Vanilla to Copper Shulker Box Upgrade",
   	"item.modernized_iron_shulker_boxes.vanilla_to_iron_shulker_box_upgrade": "Vanilla to Iron Shulker Box Upgrade",
   	"creative_mode_tab.modernized_iron_shulker_boxes": "Iron Shulker Boxes"

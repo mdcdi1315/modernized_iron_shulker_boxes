@@ -8,14 +8,26 @@ repositories {
 	
 	maven {
         // Mod menu integration, imported in by my library.
-        name = "Terraformers"
+        name = 'Terraformers'
         url = "https://maven.terraformersmc.com/"
     }
 
     maven {
-        // JEI support
-        name 'BlameJared Maven'
-        url 'https://maven.blamejared.com'
+        name = 'BMLLibRepository'
+        url = uri("https://maven.pkg.github.com/mdcdi1315/mdcdi1315_base_mods_lib")
+        credentials {
+            username = findProperty("github.username") ?: System.getenv("GITHUB_PKG_USERNAME")
+            password = findProperty("github.token") ?: System.getenv("GITHUB_PKG_API_TOKEN")
+        }
+    }
+
+    maven {
+        // Cloth Config API library, needed for configs using the DefaultScreenConfigurationFactory class.
+        name = "Shedaniel Maven"
+        url = "https://maven.shedaniel.me/"
+        content {
+            includeGroup "me.shedaniel.cloth"
+        }
     }
 
     exclusiveContent {

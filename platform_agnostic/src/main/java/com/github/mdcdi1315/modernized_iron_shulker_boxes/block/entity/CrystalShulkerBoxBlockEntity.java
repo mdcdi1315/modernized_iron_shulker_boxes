@@ -6,7 +6,9 @@ import com.github.mdcdi1315.modernized_iron_shulker_boxes.menu.CrystalShulkerBox
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Inventory;
@@ -31,17 +33,6 @@ public final class CrystalShulkerBoxBlockEntity
         this.top_stacks = NonNullList.withSize(TOP_STACKS_COUNT, ItemStack.EMPTY);
     }
 
-    @Override
-    protected CrystalShulkerBoxMenu createMenu(int pContainerId, Inventory inventory) {
-        return new CrystalShulkerBoxMenu(pContainerId, inventory, this);
-    }
-
-    @Override
-    public void setLevel(Level level) {
-        inventory_touched = true;
-        super.setLevel(level);
-    }
-
     public static void tick_crystal(Level pLevel, BlockPos pPos, BlockState pState, AbstractIronShulkerBoxBlockEntity p_entity)
     {
         AbstractIronShulkerBoxBlockEntity.tick(pLevel, pPos, pState, p_entity);
@@ -50,6 +41,27 @@ public final class CrystalShulkerBoxBlockEntity
             csb.inventory_touched = false;
             csb.SortAndDispatchStacksToClient();
         }
+    }
+
+    @Override
+    protected CrystalShulkerBoxMenu createMenu(int pContainerId, Inventory inventory) {
+        return new CrystalShulkerBoxMenu(pContainerId, inventory, this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries)
+    {
+        // Overriding getUpdateTag and specifying the inventory_touched field to true makes the update when a player loads the block entity.
+        // We do not specify any data as we just want to send an upstream request to the client for an update.
+        // (Any data will be subsequently sent on the packet that will be dispatched to the client)
+        inventory_touched = true;
+        return new CompoundTag();
+    }
+
+    @Override
+    public void setLevel(Level level) {
+        inventory_touched = true;
+        super.setLevel(level);
     }
 
     @Override
