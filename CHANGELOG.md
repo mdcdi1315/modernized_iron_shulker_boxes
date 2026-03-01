@@ -1,10 +1,7 @@
-### Releasing Version 1 Release Candidate 3:
+### Reached Version 1!
 
--> Some additional code optimizations!
+-> Fixed the bug that the Crystal Iron Shulker box did not show its top stacks in the world. Additionally added an action bar message when invalidly using an Iron Shulker Box Upgrade item to the incorrect shulker box.
 
--> Fixed the Netherite Shulker Box textures!
+-> Additionally, updated the build system for the newer BML versions.
 
-Note: If no other critical bugs are found the mod will become stable.
-
-The bug that the crystal shulker box top stacks are not loaded when transitioning from a dimension to the Overworld is known.
-However, it seems to be caused by performance optimization mods, because in the development environment it does correctly load.
+-> So, the 1.21.5 variant of the mod will soon be created!
