@@ -5,7 +5,6 @@ import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.AbstractIronShul
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -13,34 +12,35 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public final class IronShulkerBoxVanillaUpgradeItem
-    extends Item
+    extends AbstractUpgradeItem
 {
     private final AbstractIronShulkerBoxBlock target;
 
-    public IronShulkerBoxVanillaUpgradeItem(AbstractIronShulkerBoxBlock target)
+    public IronShulkerBoxVanillaUpgradeItem(ResourceLocation location, AbstractIronShulkerBoxBlock target)
     {
-        super(new Properties());
+        super(location);
         this.target = target;
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag flag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay disp, Consumer<Component> components, TooltipFlag flag)
     {
-        super.appendHoverText(stack, context, components, flag);
-        components.add(Component.translatable("modernized_iron_shulker_boxes.upgrading.vanilla_shulker_box_upgrade.upgrade", target.getName().getString()).withColor(0xff808080));
-        components.add(Component.translatable("modernized_iron_shulker_boxes.upgrading.shulker_box_upgrade.color").withColor(0xff808080)); // Gray color
+        super.appendHoverText(stack, context, disp, components, flag);
+        components.accept(Component.translatable("modernized_iron_shulker_boxes.upgrading.vanilla_shulker_box_upgrade.upgrade", target.getName().getString()).withColor(0xff808080));
+        components.accept(Component.translatable("modernized_iron_shulker_boxes.upgrading.shulker_box_upgrade.color").withColor(0xff808080)); // Gray color
     }
 
     @Override
@@ -100,8 +100,6 @@ public final class IronShulkerBoxVanillaUpgradeItem
             return InteractionResult.FAIL;
         }
     }
-
-    public int getUseDuration(ItemStack stack, LivingEntity entity) { return 0; }
 
     private static void DispatchMessageToPlayer(UseOnContext cxt, String message)
     {

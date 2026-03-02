@@ -3,11 +3,9 @@ package com.github.mdcdi1315.modernized_iron_shulker_boxes.client;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.menu.AbstractIronShulkerBoxMenu;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 
@@ -46,11 +44,7 @@ public final class IronShulkerBoxScreen
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY)
     {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, this.type.guiTexture);
-
-        guiGraphics.blit(this.type.guiTexture, (this.width - this.imageWidth) / 2, (this.height - this.imageHeight) / 2, 0, 0, this.imageWidth, this.imageHeight, this.textureXSize, this.textureYSize);
+        guiGraphics.blit(RenderType::guiTextured, this.type.guiTexture, (this.width - this.imageWidth) / 2, (this.height - this.imageHeight) / 2, 0, 0, this.imageWidth, this.imageHeight, this.textureXSize, this.textureYSize);
     }
 }
 

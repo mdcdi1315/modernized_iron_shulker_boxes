@@ -1,5 +1,7 @@
 package com.github.mdcdi1315.modernized_iron_shulker_boxes.recipes;
 
+import com.github.mdcdi1315.DotNetLayer.System.StringUtils;
+
 import com.github.mdcdi1315.basemodslib.codecs.CodecUtils;
 import com.github.mdcdi1315.basemodslib.registries.RegistryUtils;
 
@@ -37,7 +39,7 @@ public final class ColoringCraftingRecipeSerializer
         public void encode(RegistryFriendlyByteBuf buffer, ColoringCraftingRecipe recipe)
         {
             buffer.writeByte(recipe.GetColor().GetVariantID());
-            buffer.writeUtf(recipe.getGroup());
+            buffer.writeUtf(recipe.group());
             buffer.writeUtf(BuiltInRegistries.ITEM.getKey(recipe.GetShulkerBox()).toString());
         }
     }
@@ -47,7 +49,7 @@ public final class ColoringCraftingRecipeSerializer
         codec = CodecUtils.CreateMapCodecDirect(
                 IronShulkerBoxColor.CODEC.fieldOf("color").forGetter(ColoringCraftingRecipe::GetColor),
                 BuiltInRegistries.ITEM.byNameCodec().fieldOf("shulker_box").forGetter(ColoringCraftingRecipe::GetShulkerBox),
-                Codec.STRING.optionalFieldOf("group", "").forGetter(ColoringCraftingRecipe::getGroup),
+                Codec.STRING.optionalFieldOf("group", StringUtils.Empty).forGetter(ColoringCraftingRecipe::group),
                 ColoringCraftingRecipe::new
         );
         stream_codec = new NetCodec();

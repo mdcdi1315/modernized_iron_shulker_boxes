@@ -3,15 +3,9 @@
 	"show_notification": true,
   	"category": "misc",
   	"key": {
-		"G": {
-      		"item": "minecraft:glass"
-		},
-		"D": {
-      		"item": "minecraft:diamond"
-		},
-		"I": {
-      		"item": "minecraft:gold_ingot"
-    	}
+		"G": "minecraft:glass",
+		"D": "minecraft:diamond",
+		"I": "minecraft:gold_ingot"
   	},
   	"pattern": [
     	"GDG",

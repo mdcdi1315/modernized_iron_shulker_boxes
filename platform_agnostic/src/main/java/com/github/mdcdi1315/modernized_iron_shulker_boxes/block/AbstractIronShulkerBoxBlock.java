@@ -4,7 +4,7 @@ import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.MaybeNul
 
 import com.github.mdcdi1315.basemodslib.codecs.CodecUtils;
 
-import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxItem;
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxesItems;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesModInstance;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxUpgradeItem;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity.AbstractIronShulkerBoxBlockEntity;
@@ -14,29 +14,23 @@ import com.google.common.collect.Maps;
 
 import com.mojang.serialization.MapCodec;
 
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.core.BlockPos;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.Shulker;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.level.block.state.BlockState;
@@ -48,7 +42,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -60,7 +53,6 @@ import java.util.function.Function;
 public abstract class AbstractIronShulkerBoxBlock
         extends BaseEntityBlock
 {
-    private static final Component UNKNOWN_CONTENTS = Component.translatable("container.shulkerBox.unknownContents");
     private static final Map<Direction, VoxelShape> OPEN_SHAPE_BY_DIRECTION = CreateOpenShapeByDirection();
 
     public static final EnumProperty<Direction> FACING = DirectionalBlock.FACING;
@@ -153,39 +145,34 @@ public abstract class AbstractIronShulkerBoxBlock
     */
     @Override
     @Deprecated
-    public RenderShape getRenderShape(BlockState state) { return RenderShape.ENTITYBLOCK_ANIMATED; }
+    public RenderShape getRenderShape(BlockState state) { return RenderShape.MODEL; }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        return (stack.getItem() instanceof IronShulkerBoxUpgradeItem) ? ItemInteractionResult.FAIL : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        return (stack.getItem() instanceof IronShulkerBoxUpgradeItem) ? InteractionResult.FAIL : InteractionResult.TRY_WITH_EMPTY_HAND;
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
     {
-        if (level.isClientSide) {
-            return InteractionResult.SUCCESS;
-        } else if (player.isSpectator()) {
-            return InteractionResult.CONSUME;
-        } else if (level.getBlockEntity(pos) instanceof AbstractIronShulkerBoxBlockEntity block_ent) {
-            if (CanOpen(state, level, pos, block_ent)) {
-                player.openMenu(block_ent);
-                player.awardStat(Stats.OPEN_SHULKER_BOX);
-                PiglinAi.angerNearbyPiglins(player, true);
-            }
-
-            return InteractionResult.CONSUME;
-        } else {
-            return InteractionResult.PASS;
+        if (level instanceof ServerLevel sl &&
+                sl.getBlockEntity(pos) instanceof AbstractIronShulkerBoxBlockEntity block_ent &&
+                CanOpen(state, sl, pos, block_ent)
+        ) {
+            player.openMenu(block_ent);
+            player.awardStat(Stats.OPEN_SHULKER_BOX);
+            // Already that it is a server level was validated with the first if statement.
+            PiglinAi.angerNearbyPiglins(sl, player, true);
         }
+
+        return InteractionResult.SUCCESS;
     }
 
-    private static boolean CanOpen(BlockState pState, Level pLevel, BlockPos pPos, AbstractIronShulkerBoxBlockEntity pBlockEntity)
+    private static boolean CanOpen(BlockState state, Level level, BlockPos pos, AbstractIronShulkerBoxBlockEntity p_entity)
     {
-        return pBlockEntity.getAnimationStatus() != AbstractIronShulkerBoxBlockEntity.AnimationStatus.CLOSED || pLevel.noCollision(
+        return p_entity.getAnimationStatus() != AbstractIronShulkerBoxBlockEntity.AnimationStatus.CLOSED || level.noCollision(
                 Shulker
-                        .getProgressDeltaAabb(1F, pState.getValue(FACING), 0.0F, 0.5F)
-                        .move(pPos)
+                        .getProgressDeltaAabb(1F, state.getValue(FACING), 0.0F, 0.5F, pos.getBottomCenter())
                         .deflate(1.0E-6D)
         );
     }
@@ -195,7 +182,7 @@ public abstract class AbstractIronShulkerBoxBlock
         return this.defaultBlockState()
                 .setValue(FACING, cxt.getClickedFace())
                 .setValue(COLOR, Objects.requireNonNullElse(
-                        cxt.getItemInHand().get(IronShulkerBoxColorDataComponentType.INSTANCE),
+                        cxt.getItemInHand().get((DataComponentType<IronShulkerBoxColor>) IronShulkerBoxColorDataComponentType.INSTANCE),
                         IronShulkerBoxColor.NONE
                 ));
     }
@@ -204,21 +191,17 @@ public abstract class AbstractIronShulkerBoxBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) { builder.add(FACING, COLOR); }
 
     /**
-     * Called before the Block is set to air in the world. Called regardless of if the player's tool can actually collect
-     * this block
-     *
+     * Called before the Block is set to air in the world.
+     * Called regardless of if the player's tool can actually collect this block.
      * @return
      */
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (level.getBlockEntity(pos) instanceof AbstractIronShulkerBoxBlockEntity isb_entity) {
-            if (!level.isClientSide && player.isCreative() && !isb_entity.isEmpty()) {
-                ItemStack itemstack = IronShulkerBoxItem.CreateItemStack(state.getValue(COLOR), this);
-                isb_entity.saveToItem(itemstack, level.registryAccess());
-                if (isb_entity.hasCustomName()) {
-                    itemstack.set(DataComponents.CUSTOM_NAME, isb_entity.getCustomName());
-                }
-
+            if (!level.isClientSide && player.preventsBlockDrops() && !isb_entity.isEmpty()) {
+                ItemStack itemstack = new ItemStack(IronShulkerBoxesItems.ResolveShulkerBoxItemByBlock(this), 1);
+                itemstack.applyComponents(isb_entity.collectComponents());
+                itemstack.set(IronShulkerBoxColorDataComponentType.INSTANCE, state.getValue(COLOR));
                 ItemEntity itementity = new ItemEntity(level ,pos.getX() + 0.5D,pos.getY() + 0.5D,pos.getZ() + 0.5D, itemstack);
                 itementity.setDefaultPickUpDelay();
                 level.addFreshEntity(itementity);
@@ -227,9 +210,7 @@ public abstract class AbstractIronShulkerBoxBlock
             }
         }
 
-        super.playerWillDestroy(level, pos, state, player);
-
-        return state;
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     @Override
@@ -243,28 +224,16 @@ public abstract class AbstractIronShulkerBoxBlock
         return super.getDrops(state, builder);
     }
 
-    /**
-     * Called by BlockItem after this block has been placed.
-     */
-    @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @MaybeNull LivingEntity placer, ItemStack item_stack)
-    {
-        if (item_stack.get(DataComponents.CUSTOM_NAME) != null && level.getBlockEntity(pos) instanceof AbstractIronShulkerBoxBlockEntity ent)
-        {
-            ent.setComponents(
-                    DataComponentMap.builder()
-                            .addAll(ent.components()) // Retain all the old components! Not doing this we lose every custom data set!
-                            .set(DataComponents.CUSTOM_NAME , item_stack.getHoverName())
-                            .build()
-            );
-            // ent.setCustomName(pStack.getHoverName());
-        }
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean moved_by_piston) {
+        Containers.updateNeighboursAfterDestroy(state, level, pos);
     }
 
+    /* We don't need this anymore see the method above ^
     @Override
     @Deprecated
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState new_state, boolean moving_by_piston)
     {
+        super.affectNeighborsAfterRemoval();
         // super.onRemove calls removeBlockEntity if the given state is a block entity.
         // If it does, it removes it. The code below just avoids calling the base implementation
         // and rather calls that directly since we have verified that the block entity is our block.
@@ -274,30 +243,7 @@ public abstract class AbstractIronShulkerBoxBlock
             level.removeBlockEntity(pos);
         }
     }
-
-    @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> components, TooltipFlag flag) {
-        super.appendHoverText(stack , context , components , flag);
-        if (stack.has(DataComponents.CONTAINER_LOOT)) {
-            components.add(UNKNOWN_CONTENTS);
-        } else {
-            int shown = 0, count = 0;
-
-            for (ItemStack itemstack : (stack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY)).nonEmptyItems()) {
-                ++count;
-                if (shown < 5) {
-                    shown++;
-                    components.add(Component.translatable("container.shulkerBox.itemCount", itemstack.getHoverName(), itemstack.getCount()));
-                }
-            }
-
-            int more = count - shown;
-
-            if (more > 0) {
-                components.add(Component.translatable("container.shulkerBox.more", more).withStyle(ChatFormatting.ITALIC));
-            }
-        }
-    }
+     */
 
     @Override
     public VoxelShape getBlockSupportShape(BlockState state, BlockGetter getter, BlockPos pos) {
@@ -313,7 +259,7 @@ public abstract class AbstractIronShulkerBoxBlock
         return level.getBlockEntity(pos) instanceof AbstractIronShulkerBoxBlockEntity entity ? Shapes.create(entity.getBoundingBox(state)) : Shapes.block();
     }
 
-    protected boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) { return false; }
+    protected boolean propagatesSkylightDown(BlockState state) { return false; }
 
    /**
     * @deprecated call via {@link
@@ -331,20 +277,8 @@ public abstract class AbstractIronShulkerBoxBlock
     */
     @Override
     @Deprecated
-    public int getAnalogOutputSignal(BlockState pBlockState, Level pLevel, BlockPos pPos) {
-        return AbstractContainerMenu.getRedstoneSignalFromContainer((Container) pLevel.getBlockEntity(pPos));
-    }
-
-    @Override
-    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state)
-    {
-        ItemStack itemstack = super.getCloneItemStack(level, pos, state);
-
-        Optional<? extends AbstractIronShulkerBoxBlockEntity> opt = level.getBlockEntity(pos, GetBlockEntityType());
-        if (opt.isPresent()) {
-            opt.get().saveToItem(itemstack , level.registryAccess());
-        }
-        return itemstack;
+    public int getAnalogOutputSignal(BlockState block_state, Level level, BlockPos pos) {
+        return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
     }
 
     public static IronShulkerBoxesTypes getTypeFromBlock(Block blockIn) {

@@ -1,13 +1,13 @@
 package com.github.mdcdi1315.modernized_iron_shulker_boxes.client;
 
+import com.github.mdcdi1315.basemodslib.client.*;
 import com.github.mdcdi1315.basemodslib.mods.IClientModInstance;
-import com.github.mdcdi1315.basemodslib.client.IMenuScreensRegistrar;
-import com.github.mdcdi1315.basemodslib.client.IBlockEntityRendererRegistrar;
-import com.github.mdcdi1315.basemodslib.client.BlockEntityRendererRegistrationInfo;
 
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesModInstance;
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesBlocks;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.menu.IronShulkerBoxesMenuTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity.IronShulkerBoxesBlockEntities;
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.client.itemrendering.IronShulkerBoxSpecialRenderer;
 
 public final class IronShulkerBoxesClientModInstance
     implements IClientModInstance
@@ -88,6 +88,28 @@ public final class IronShulkerBoxesClientModInstance
                 () -> IronShulkerBoxesMenuTypes.NETHERITE_SHULKER_BOX,
                 IronShulkerBoxScreen::new
         );
+    }
+
+    @Override
+    public void RegisterSpecialModelRenderers(ISpecialModelRendererRegistrar registrar)
+    {
+        var renderer = IronShulkerBoxSpecialRenderer.Unbaked.INSTANCE;
+
+        registrar.Register(new SpecialModelRendererRegistrationInfo(() -> IronShulkerBoxesBlocks.COPPER_SHULKER_BOX, renderer));
+
+        registrar.Register(new SpecialModelRendererRegistrationInfo(() -> IronShulkerBoxesBlocks.IRON_SHULKER_BOX, renderer));
+
+        registrar.Register(new SpecialModelRendererRegistrationInfo(() -> IronShulkerBoxesBlocks.GOLD_SHULKER_BOX, renderer));
+
+        registrar.Register(new SpecialModelRendererRegistrationInfo(() -> IronShulkerBoxesBlocks.DIAMOND_SHULKER_BOX, renderer));
+
+        registrar.Register(new SpecialModelRendererRegistrationInfo(() -> IronShulkerBoxesBlocks.CRYSTAL_SHULKER_BOX, renderer));
+
+        registrar.Register(new SpecialModelRendererRegistrationInfo(() -> IronShulkerBoxesBlocks.OBSIDIAN_SHULKER_BOX, renderer));
+
+        registrar.Register(new SpecialModelRendererRegistrationInfo(() -> IronShulkerBoxesBlocks.NETHERITE_SHULKER_BOX, renderer));
+
+        registrar.RegisterCodec(new SpecialModelRendererCodecRegistrationInfo(IronShulkerBoxesModInstance.ID("shulker_box_renderer"), IronShulkerBoxSpecialRenderer.Unbaked.CODEC));
     }
 
     @Override

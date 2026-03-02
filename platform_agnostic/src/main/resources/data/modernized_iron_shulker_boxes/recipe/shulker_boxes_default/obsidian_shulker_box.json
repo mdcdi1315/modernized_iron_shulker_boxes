@@ -3,15 +3,9 @@
 	"show_notification": true,
 	"category": "misc",
 	"key": {
-		"G": {
-			"item": "minecraft:gold_ingot"
-		},
-		"O": {
-			"item": "minecraft:obsidian"
-		},
-		"S": {
-			"item": "modernized_iron_shulker_boxes:diamond_shulker_box"
-		}
+		"G": "minecraft:gold_ingot",
+		"O": "minecraft:obsidian",
+		"S": "modernized_iron_shulker_boxes:diamond_shulker_box"
 	},
 	"pattern": [
 		"OOO",

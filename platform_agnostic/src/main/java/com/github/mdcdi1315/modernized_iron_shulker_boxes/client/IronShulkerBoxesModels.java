@@ -1,5 +1,6 @@
 package com.github.mdcdi1315.modernized_iron_shulker_boxes.client;
 
+import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.AllowNull;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxColor;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesModInstance;
@@ -84,5 +85,12 @@ public final class IronShulkerBoxesModels
             case NETHERITE -> NETHERITE_SHULKER_TEXTURE_LOCATION;
             default -> SHULKER_TEXTURE_LOCATION;
         };
+    }
+
+    public static ResourceLocation chooseShulkerBoxTexture(IronShulkerBoxesTypes type, @AllowNull IronShulkerBoxColor color)
+    {
+        return (color == null || color == IronShulkerBoxColor.NONE) ?
+                chooseShulkerBoxTexture(type) :
+                chooseShulkerBoxTexture(type, color.GetVariantID() - 1);
     }
 }

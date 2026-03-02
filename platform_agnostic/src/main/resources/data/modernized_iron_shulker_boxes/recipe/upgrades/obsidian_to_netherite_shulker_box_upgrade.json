@@ -3,18 +3,10 @@
 	"category": "misc",
 	"show_notification": true,
 	"key": {
-		"G": {
-			"item": "minecraft:gold_ingot"
-		},
-		"O": {
-			"item": "minecraft:obsidian"
-		},
-		"I": {
-			"item": "minecraft:netherite_ingot"
-		},
-		"C": {
-			"item": "minecraft:coal"
-		}
+		"G": "minecraft:gold_ingot",
+		"O": "minecraft:obsidian",
+		"I": "minecraft:netherite_ingot",
+		"C": "minecraft:coal"
 	},
 	"pattern": [
 		"GOG",

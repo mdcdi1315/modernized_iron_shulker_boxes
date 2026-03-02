@@ -2,27 +2,13 @@
 	"type": "minecraft:crafting_shapeless",
 	"category": "misc",
 	"ingredients": [
-		{
-			"item": "modernized_iron_shulker_boxes:crystal_shulker_box"
-		},
-		{
-			"item": "minecraft:diamond"
-		},
-		{
-			"item": "minecraft:diamond"
-		},
-		{
-			"item": "minecraft:diamond"
-		},
-		{
-			"item": "minecraft:diamond"
-		},
-		{
-			"item": "minecraft:diamond"
-		},
-		{
-			"item": "minecraft:diamond"
-		}
+		"modernized_iron_shulker_boxes:crystal_shulker_box",
+		"minecraft:diamond",
+		"minecraft:diamond",
+		"minecraft:diamond",
+		"minecraft:diamond",
+		"minecraft:diamond",
+		"minecraft:diamond"
 	],
 	"result": {
 		"count": 1,

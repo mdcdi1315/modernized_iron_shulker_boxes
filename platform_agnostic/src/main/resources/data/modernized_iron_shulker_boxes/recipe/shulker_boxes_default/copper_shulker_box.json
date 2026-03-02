@@ -3,12 +3,8 @@
 	"show_notification": true,
 	"category": "misc",
 	"key": {
-		"C": {
-			"item": "minecraft:copper_ingot"
-		},
-		"S": {
-			"item": "minecraft:shulker_box"
-		}
+		"C": "minecraft:copper_ingot",
+		"S": "minecraft:shulker_box"
 	},
 	"pattern": [
 		"CCC",

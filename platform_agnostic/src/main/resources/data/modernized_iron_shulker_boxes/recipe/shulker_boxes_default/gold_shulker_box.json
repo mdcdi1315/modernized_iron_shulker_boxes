@@ -3,12 +3,8 @@
 	"show_notification": true,
 	"category": "misc",
 	"key": {
-		"G": {
-			"item": "minecraft:gold_ingot"
-		},
-		"S": {
-			"item": "modernized_iron_shulker_boxes:iron_shulker_box"
-		}
+		"G": "minecraft:gold_ingot",
+		"S": "modernized_iron_shulker_boxes:iron_shulker_box"
 	},
 	"pattern": [
 		"GGG",

@@ -6,17 +6,16 @@ import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.AbstractIronShul
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity.AbstractIronShulkerBoxBlockEntity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.client.model.ShulkerModel;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -26,16 +25,23 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 public class IronShulkerBoxRenderer<T extends AbstractIronShulkerBoxBlockEntity>
         implements BlockEntityRenderer<T>
 {
-    private final ShulkerModel<?> model;
+    private final ShulkerBoxModel model;
     protected final BlockEntityRenderDispatcher renderer;
 
     public IronShulkerBoxRenderer(BlockEntityRendererProvider.Context context) {
-        this.model = new ShulkerModel<>(context.bakeLayer(ModelLayers.SHULKER));
-        this.renderer = context.getBlockEntityRenderDispatcher();
+        this(context.getModelSet(), context.getBlockEntityRenderDispatcher());
+    }
+
+    private IronShulkerBoxRenderer(EntityModelSet modelSet, BlockEntityRenderDispatcher dispatcher)
+    {
+        super();
+        this.renderer = dispatcher;
+        this.model = new ShulkerBoxModel(modelSet);
     }
 
     @Override
-    public void render(T tileEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLightIn, int combinedOverlayIn) {
+    public void render(T tileEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLightIn, int combinedOverlayIn, Vec3 position)
+    {
         IronShulkerBoxColor color = null;
         Direction direction = Direction.UP;
         BlockState block_state = tileEntityIn.getBlockState();
@@ -50,13 +56,10 @@ public class IronShulkerBoxRenderer<T extends AbstractIronShulkerBoxBlockEntity>
 
         if (typeFromBlock != null && boxType != typeFromBlock) { boxType = typeFromBlock; }
 
-        Material material;
-
-        if (color == null || color == IronShulkerBoxColor.NONE) {
-            material = new Material(Sheets.SHULKER_SHEET, IronShulkerBoxesModels.chooseShulkerBoxTexture(boxType));
-        } else {
-            material = new Material(Sheets.SHULKER_SHEET, IronShulkerBoxesModels.chooseShulkerBoxTexture(boxType, color.GetVariantID() - 1));
-        }
+        Material material = new Material(
+                Sheets.SHULKER_SHEET,
+                IronShulkerBoxesModels.chooseShulkerBoxTexture(boxType, color)
+        );
 
         poseStack.pushPose(); // POSE PUSH UNSAFE BEGIN
         try {
@@ -65,10 +68,9 @@ public class IronShulkerBoxRenderer<T extends AbstractIronShulkerBoxBlockEntity>
             poseStack.mulPose(direction.getRotation());
             poseStack.scale(1.0F, -1.0F, -1.0F);
             poseStack.translate(0.0F, -1.0F, 0.0F);
-            ModelPart modelpart = this.model.getLid();
-            modelpart.setPos(0.0F, 24.0F - tileEntityIn.GetProgress(partialTicks) * 0.5F * 16.0F, 0.0F);
-            modelpart.yRot = 270.0F * tileEntityIn.GetProgress(partialTicks) * ((float) Math.PI / 180F);
-            this.model.renderToBuffer(poseStack, material.buffer(bufferSource, RenderType::entityCutoutNoCull), combinedLightIn, combinedOverlayIn); //  1.0F, 1.0F, 1.0F, 1.0F
+            this.model.animate(tileEntityIn.GetProgress(partialTicks));
+            VertexConsumer vertexconsumer = material.buffer(bufferSource, this.model::renderType);
+            this.model.renderToBuffer(poseStack, vertexconsumer, combinedLightIn, combinedOverlayIn);
         } finally {
             poseStack.popPose(); // POSE POP UNSAFE END
         }

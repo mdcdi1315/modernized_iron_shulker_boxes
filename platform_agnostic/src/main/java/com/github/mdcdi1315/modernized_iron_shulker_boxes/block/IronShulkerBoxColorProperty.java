@@ -7,7 +7,6 @@ import net.minecraft.world.level.block.state.properties.Property;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.Collection;
 
 /**
  * A block state property for handling iron shulker boxes color variants.
@@ -24,7 +23,7 @@ public final class IronShulkerBoxColorProperty
 
     @NotNull
     @Override
-    public Collection<IronShulkerBoxColor> getPossibleValues() { return values; }
+    public List<IronShulkerBoxColor> getPossibleValues() { return values; }
 
     @NotNull
     @Override
@@ -41,4 +40,7 @@ public final class IronShulkerBoxColorProperty
         }
         return Optional.empty();
     }
+
+    @Override
+    public int getInternalIndex(IronShulkerBoxColor color) { return color.ordinal(); }
 }

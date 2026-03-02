@@ -3,15 +3,9 @@
 	"show_notification": true,
 	"category": "misc",
 	"key": {
-		"I": {
-			"item": "minecraft:iron_ingot"
-		},
-		"S": {
-			"item": "modernized_iron_shulker_boxes:copper_shulker_box"
-		},
-		"G": {
-			"item": "minecraft:glass"
-		}
+		"I": "minecraft:iron_ingot",
+		"S": "modernized_iron_shulker_boxes:copper_shulker_box",
+		"G": "minecraft:glass"
 	},
 	"pattern": [
 		"IGI",

@@ -1,0 +1,9 @@
+{
+	"model": {
+		"type": "minecraft:special",
+		"base": "modernized_iron_shulker_boxes:item/copper_shulker_box",
+		"model": {
+			"type": "modernized_iron_shulker_boxes:shulker_box_renderer"
+		}
+	}
+}

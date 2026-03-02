@@ -8,6 +8,7 @@ import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.AbstractIronShul
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.nbt.CompoundTag;
@@ -110,15 +111,15 @@ public abstract class AbstractIronShulkerBoxBlockEntity
 
     public AnimationStatus getAnimationStatus() { return this.animationStatus; }
 
-    public AABB getBoundingBox(BlockState pState) {
-        return Shulker.getProgressAabb(1f, pState.getValue(AbstractIronShulkerBoxBlock.FACING), 0.5F * this.GetProgress(1.0F));
+    public AABB getBoundingBox(BlockState state) {
+        return Shulker.getProgressAabb(1f, state.getValue(AbstractIronShulkerBoxBlock.FACING), 0.5F * this.GetProgress(1.0F), new Vec3(0.5d, 0.0d, 0.5d));
     }
 
     private void moveCollidedEntities(Level pLevel, BlockPos pPos, BlockState state)
     {
         if (state.getBlock() instanceof AbstractIronShulkerBoxBlock) {
             Direction direction = state.getValue(AbstractIronShulkerBoxBlock.FACING);
-            AABB aabb = Shulker.getProgressDeltaAabb(1f, direction, this.progressOld , this.progress).move(pPos);
+            AABB aabb = Shulker.getProgressDeltaAabb(1f, direction, this.progressOld , this.progress, pPos.getBottomCenter());
             List<Entity> list = pLevel.getEntities(null, aabb);
 
             if (!list.isEmpty()) {
@@ -202,12 +203,17 @@ public abstract class AbstractIronShulkerBoxBlockEntity
     @Override
     protected Component getDefaultName() { return getBlockState().getBlock().getName(); }
 
+    // We must override the below to be empty because this is not chest container and do not want it's contents to be dropped to the player.
+    // Otherwise, the purpose of Shulker Boxes is to retain their content once broken.
+    @Override
+    public final void preRemoveSideEffects(BlockPos pos, BlockState state) {}
+
     @Override
     public final void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
 
-        if (!tryLoadLootTable(tag) && tag.contains("Items", CompoundTag.TAG_LIST)) {
+        if (!tryLoadLootTable(tag) && tag.contains("Items")) {
             ContainerHelper.loadAllItems(tag, this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY), registries);
         }
         OnLoad();

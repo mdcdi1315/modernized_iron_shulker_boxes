@@ -2,6 +2,7 @@ package com.github.mdcdi1315.modernized_iron_shulker_boxes.recipes;
 
 import com.github.mdcdi1315.DotNetLayer.System.ArgumentNullException;
 import com.github.mdcdi1315.DotNetLayer.System.InvalidOperationException;
+import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.NotNull;
 import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.DisallowNull;
 
 // import com.github.mdcdi1315.modernized_iron_shulker_boxes.tags.ItemTags;
@@ -9,12 +10,15 @@ import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxIte
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxColor;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.datacomponent.IronShulkerBoxColorDataComponentType;
 
+import com.google.common.collect.ImmutableList;
+
 import net.minecraft.world.item.*;
-import net.minecraft.core.NonNullList;
 import net.minecraft.world.level.Level;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.crafting.*;
-import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -24,8 +28,8 @@ public final class ColoringCraftingRecipe
 {
     private final String group;
     private final IronShulkerBoxColor color;
+    private final List<Ingredient> ingredients;
     private final IronShulkerBoxItem shulker_box;
-    private final NonNullList<Ingredient> ingredients;
 
     public ColoringCraftingRecipe(IronShulkerBoxColor color , Item shulker_box_item, String group)
     {
@@ -44,19 +48,11 @@ public final class ColoringCraftingRecipe
         } else {
             throw new InvalidOperationException("The specified item is not an iron shulker box item!");
         }
-        ingredients = NonNullList.of(
-                Ingredient.EMPTY ,
+        ingredients = ImmutableList.of(
                 Ingredient.of(shulker_box),
                 Ingredient.of(DyeItem.byColor(this.color.AsDyeColor()))
         );
     }
-
-    public IronShulkerBoxColor GetColor() { return color; }
-
-    public IronShulkerBoxItem GetShulkerBox() { return shulker_box; }
-
-    @Override
-    public CraftingBookCategory category() { return CraftingBookCategory.MISC; }
 
     private static final class ItemByRef { public ItemStack item; }
 
@@ -83,10 +79,15 @@ public final class ColoringCraftingRecipe
         }
     }
 
-    @Override
-    public boolean matches(CraftingInput input, Level level) {
-        return MatchesAndGetItems(input, new ItemByRef());
+    private SlotDisplay ConstructResultItem()
+    {
+        ItemStack item = new ItemStack(shulker_box);
+        item.set(IronShulkerBoxColorDataComponentType.INSTANCE , this.color);
+        return new SlotDisplay.ItemStackSlotDisplay(item);
     }
+
+    @Override
+    public boolean matches(CraftingInput input, Level level) { return MatchesAndGetItems(input, new ItemByRef()); }
 
     @Override
     public ItemStack assemble(CraftingInput input, HolderLookup.Provider provider)
@@ -96,12 +97,7 @@ public final class ColoringCraftingRecipe
 
             ItemStack new_stack = sk.item.copy();
 
-            new_stack.applyComponents(
-                    DataComponentMap
-                            .builder()
-                            .set(IronShulkerBoxColorDataComponentType.INSTANCE , color)
-                            .build()
-            );
+            new_stack.set(IronShulkerBoxColorDataComponentType.INSTANCE , color);
 
             return new_stack;
         } else {
@@ -110,27 +106,32 @@ public final class ColoringCraftingRecipe
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) { return true; }
-
-    @Override
-    public String getGroup() { return group; }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients() { return ingredients; }
-
-    @Override
-    public ItemStack getResultItem(HolderLookup.Provider provider)
+    public List<RecipeDisplay> display()
     {
-        ItemStack is = new ItemStack(shulker_box, 1);
-        is.applyComponents(
-                DataComponentMap
-                        .builder()
-                        .set(IronShulkerBoxColorDataComponentType.INSTANCE , color)
-                        .build()
+        List<SlotDisplay> ingd = new ArrayList<>(ingredients.size());
+        for (Ingredient ing : ingredients) { ingd.add(ing.display()); }
+        return ImmutableList.of(
+            new ShapelessCraftingRecipeDisplay(ingd, ConstructResultItem(), new SlotDisplay.ItemSlotDisplay(Items.CRAFTING_TABLE))
         );
-        return is;
     }
 
+    @NotNull
     @Override
-    public RecipeSerializer<?> getSerializer() { return ColoringCraftingRecipeSerializer.INSTANCE; }
+    public String group() { return group; }
+
+    @Override
+    public boolean showNotification() { return true; }
+
+    public IronShulkerBoxColor GetColor() { return color; }
+
+    public IronShulkerBoxItem GetShulkerBox() { return shulker_box; }
+
+    @Override
+    public CraftingBookCategory category() { return CraftingBookCategory.MISC; }
+
+    @Override
+    public PlacementInfo placementInfo() { return PlacementInfo.create(ingredients); }
+
+    @Override
+    public RecipeSerializer<? extends CraftingRecipe> getSerializer() { return ColoringCraftingRecipeSerializer.INSTANCE; }
 }

@@ -3,15 +3,9 @@
 	"show_notification": true,
 	"category": "misc",
 	"key": {
-		"D": {
-			"item": "minecraft:diamond"
-		},
-		"S": {
-			"item": "modernized_iron_shulker_boxes:gold_shulker_box"
-		},
-		"G": {
-			"item": "minecraft:glass"
-		}
+		"D": "minecraft:diamond",
+		"S": "modernized_iron_shulker_boxes:gold_shulker_box",
+		"G": "minecraft:glass"
 	},
 	"pattern": [
 		"GGG",

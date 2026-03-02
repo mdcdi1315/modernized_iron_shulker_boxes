@@ -45,9 +45,9 @@ public final class CrystalIronShulkerBoxRenderer<T extends AbstractIronShulkerBo
     public CrystalIronShulkerBoxRenderer(BlockEntityRendererProvider.Context context) { super(context); }
 
     @Override
-    public void render(T tileEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLightIn, int combinedOverlayIn)
+    public void render(T tileEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLightIn, int combinedOverlayIn, Vec3 position)
     {
-        super.render(tileEntityIn, partialTicks, poseStack, bufferSource, combinedLightIn, combinedOverlayIn);
+        super.render(tileEntityIn, partialTicks, poseStack, bufferSource, combinedLightIn, combinedOverlayIn, position);
 
         if (tileEntityIn.HasTransparentSides() && Vec3.atCenterOf(tileEntityIn.getBlockPos()).closerThan(this.renderer.camera.getPosition(), 128d))
         {

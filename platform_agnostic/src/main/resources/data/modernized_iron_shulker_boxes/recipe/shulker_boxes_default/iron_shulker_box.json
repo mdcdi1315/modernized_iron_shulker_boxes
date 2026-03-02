@@ -3,12 +3,8 @@
 	"show_notification": true,
 	"category": "misc",
 	"key": {
-		"I": {
-			"item": "minecraft:iron_ingot"
-		},
-		"S": {
-			"item": "minecraft:shulker_box"
-		}
+		"I": "minecraft:iron_ingot",
+		"S": "minecraft:shulker_box"
 	},
 	"pattern": [
 		"III",

@@ -3,15 +3,9 @@
   	"category": "misc",
 	"show_notification": true,
   	"key": {
-    	"C": {
-      		"item": "minecraft:copper_ingot"
-    	},
-		"G": {
-      		"item": "minecraft:glass"
-		},
-    	"I": {
-      		"item": "minecraft:iron_ingot"
-    	}
+    	"C": "minecraft:copper_ingot",
+		"G": "minecraft:glass",
+    	"I": "minecraft:iron_ingot"
   	},
   	"pattern": [
 	    "IGI",
