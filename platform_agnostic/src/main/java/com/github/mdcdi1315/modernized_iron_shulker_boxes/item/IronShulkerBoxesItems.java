@@ -58,7 +58,7 @@ public final class IronShulkerBoxesItems
         registrar.Register("gold_to_diamond_shulker_box_upgrade" , new ItemRegistrationInformation(
                 (rl) -> new IronShulkerBoxUpgradeItem(
                         IronShulkerBoxesBlocks.GOLD_SHULKER_BOX,
-                        IronShulkerBoxesBlocks.IRON_SHULKER_BOX
+                        IronShulkerBoxesBlocks.DIAMOND_SHULKER_BOX
                 ),
                 IronShulkerBoxesCreativeModeTabs.IRON_SHULKER_BOXES
         ));

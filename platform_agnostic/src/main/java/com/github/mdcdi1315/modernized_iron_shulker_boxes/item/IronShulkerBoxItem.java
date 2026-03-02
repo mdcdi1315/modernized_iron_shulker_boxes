@@ -98,15 +98,9 @@ public final class IronShulkerBoxItem
     }
 
     @Override
-    public boolean canFitInsideContainerItems()
-    {
-        Block b = this.getBlock();
-        return !((b instanceof AbstractIronShulkerBoxBlock) || (b instanceof ShulkerBoxBlock));
-    }
+    public boolean canFitInsideContainerItems() { return false; }
 
-    public BlockEntity GetBlockEntity(ItemStack stack) {
-        return block_ent_to_render_getter.function();
-    }
+    public BlockEntity GetBlockEntity(ItemStack stack) { return block_ent_to_render_getter.function(); }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag tooltipFlag)

@@ -227,9 +227,7 @@ public abstract class AbstractIronShulkerBoxBlock
             }
         }
 
-        super.playerWillDestroy(level, pos, state, player);
-
-        return state;
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     @Override

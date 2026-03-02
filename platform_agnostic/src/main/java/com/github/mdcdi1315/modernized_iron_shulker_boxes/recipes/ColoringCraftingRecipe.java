@@ -51,13 +51,6 @@ public final class ColoringCraftingRecipe
         );
     }
 
-    public IronShulkerBoxColor GetColor() { return color; }
-
-    public IronShulkerBoxItem GetShulkerBox() { return shulker_box; }
-
-    @Override
-    public CraftingBookCategory category() { return CraftingBookCategory.MISC; }
-
     private static final class ItemByRef { public ItemStack item; }
 
     private boolean MatchesAndGetItems(CraftingInput input, @DisallowNull ItemByRef shulker_box)
@@ -122,15 +115,20 @@ public final class ColoringCraftingRecipe
     public ItemStack getResultItem(HolderLookup.Provider provider)
     {
         ItemStack is = new ItemStack(shulker_box, 1);
-        is.applyComponents(
-                DataComponentMap
-                        .builder()
-                        .set(IronShulkerBoxColorDataComponentType.INSTANCE , color)
-                        .build()
-        );
+        is.set(IronShulkerBoxColorDataComponentType.INSTANCE , color);
         return is;
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() { return ColoringCraftingRecipeSerializer.INSTANCE; }
+    public boolean showNotification() { return true; }
+
+    public IronShulkerBoxColor GetColor() { return color; }
+
+    public IronShulkerBoxItem GetShulkerBox() { return shulker_box; }
+
+    @Override
+    public CraftingBookCategory category() { return CraftingBookCategory.MISC; }
+
+    @Override
+    public RecipeSerializer<? extends CraftingRecipe> getSerializer() { return ColoringCraftingRecipeSerializer.INSTANCE; }
 }
