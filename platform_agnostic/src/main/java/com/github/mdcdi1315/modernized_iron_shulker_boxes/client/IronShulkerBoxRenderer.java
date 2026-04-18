@@ -63,14 +63,19 @@ public class IronShulkerBoxRenderer<T extends AbstractIronShulkerBoxBlockEntity>
 
         poseStack.pushPose(); // POSE PUSH UNSAFE BEGIN
         try {
+            // At least there is no now the requirement of scaling two times.
+            // poseStack.translate(0.5F, 0.5F, 0.5F);
+            // poseStack.scale(0.9995F, 0.9995F, 0.9995F);
+            // poseStack.mulPose(direction.getRotation());
+            // poseStack.scale(1.0F, -1.0F, -1.0F);
+            // poseStack.translate(0.0F, -1.0F, 0.0F);
+
             poseStack.translate(0.5F, 0.5F, 0.5F);
-            poseStack.scale(0.9995F, 0.9995F, 0.9995F);
             poseStack.mulPose(direction.getRotation());
-            poseStack.scale(1.0F, -1.0F, -1.0F);
+            poseStack.scale(0.9995F, -0.9995F, -0.9995F);
             poseStack.translate(0.0F, -1.0F, 0.0F);
             this.model.animate(tileEntityIn.GetProgress(partialTicks));
-            VertexConsumer vertexconsumer = material.buffer(bufferSource, this.model::renderType);
-            this.model.renderToBuffer(poseStack, vertexconsumer, combinedLightIn, combinedOverlayIn);
+            this.model.renderToBuffer(poseStack, material.buffer(bufferSource, this.model::renderType), combinedLightIn, combinedOverlayIn);
         } finally {
             poseStack.popPose(); // POSE POP UNSAFE END
         }

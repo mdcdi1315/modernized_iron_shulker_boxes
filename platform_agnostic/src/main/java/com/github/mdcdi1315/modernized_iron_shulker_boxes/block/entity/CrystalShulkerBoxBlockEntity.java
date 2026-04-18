@@ -2,6 +2,8 @@ package com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity;
 
 import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.NotNull;
 
+import com.github.mdcdi1315.basemodslib.item.ItemStackSet;
+
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.menu.CrystalShulkerBoxMenu;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
 
@@ -97,17 +99,15 @@ public final class CrystalShulkerBoxBlockEntity
     private List<ItemStack> GetTopItemStacks()
     {
         // We will put the stacks to render in a non-collisible set, then we will create it as a list and dispatch the packet.
-        Set<ItemStack> set = new HashSet<>(TOP_STACKS_COUNT);
+        ItemStackSet set = new ItemStackSet();
 
         List<ItemStack> items = getItems();
-        int size = items.size(), count = Math.min(size, TOP_STACKS_COUNT);
-        for (int C = 0, I = 0; C < count && I < size; ) // Run 8 or fewer times, depending on the items contained in the shulker box.
+        int size = items.size();
+        int count = Math.min(size, TOP_STACKS_COUNT);
+        for (int I = 0, C = 0; I < size && C < count; I++) // Enumerate the entire collection, until we hit 8 different items in the set or when we have exhausted the container contents.
         {
-            for (; I < size; I++) {
-                // Check, this item type has been already pushed to the top stacks list?
-                ItemStack o = items.get(I);
-                if (o != ItemStack.EMPTY && set.add(o)) { C++; } // If yes, continue finding the next element.
-            }
+            // Check, this item type has been already pushed to the top stacks list?
+            if (set.add(items.get(I))) { C++; } // If yes, continue finding the next element.
         }
         return List.copyOf(set);
     }

@@ -38,14 +38,21 @@ public final class IronShulkerBoxSpecialRenderer
     {
         pose_stack.pushPose(); // POSE PUSH UNSAFE BEGIN
         try {
+            /*
+            Original code is the below:
+            But because we do not need the direction, we avoid the multiplication at all.
+            And we do not need any translations for the outcome of this.
+            So we just specify the translations to flip the image and appropriately scale to inventory slots.
             pose_stack.translate(0.5F, 0.5F, 0.5F);
             pose_stack.scale(0.9995F, 0.9995F, 0.9995F);
             pose_stack.mulPose(Direction.UP.getRotation());
             pose_stack.scale(1.0F, -1.0F, -1.0F);
             pose_stack.translate(0.0F, -1.0F, 0.0F);
-            // this.model.animate(0f); // Not needed for the SMR
-            VertexConsumer vertexconsumer = material.buffer(multi_buffer_source, this.model::renderType);
-            this.model.renderToBuffer(pose_stack, vertexconsumer, packed_light, packed_overlay);
+            this.model.animate(0f); // Not needed for the SMR
+             */
+            pose_stack.translate(0.5F, 1.5F, 0.5F);
+            pose_stack.scale(1.0F, -1.0F, -1.0F);
+            this.model.renderToBuffer(pose_stack, material.buffer(multi_buffer_source, this.model::renderType), packed_light, packed_overlay);
         } finally {
             pose_stack.popPose(); // POSE POP UNSAFE END
         }

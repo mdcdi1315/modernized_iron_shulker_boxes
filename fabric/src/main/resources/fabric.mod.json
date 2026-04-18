@@ -18,7 +18,7 @@
 		"modmenu": {
 			"update_checker": false,
 			"links": {
-				"modmenu.discord": "${discord}"
+				"modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/modernized-iron-shulker-boxes"
 			}
 		}
 	},

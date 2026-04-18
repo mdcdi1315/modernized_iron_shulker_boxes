@@ -53,7 +53,7 @@ public final class CrystalIronShulkerBoxRenderer<T extends AbstractIronShulkerBo
         {
             List<ItemStack> list = tileEntityIn.GetTopStacks();
 
-            if (!list.isEmpty())
+            if (list.size() > 0) // This check is faster than !list.isEmpty()
             {
                 float rotation = (float) (360D * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL) - partialTicks;
 
