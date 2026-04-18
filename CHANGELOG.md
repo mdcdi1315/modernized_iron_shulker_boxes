@@ -1,3 +1,5 @@
-### Reached Version 1!
+### Releasing Version 1.0.2:
 
--> Fixed some issues occurred with the release of V1 and done some optimizations on the item logic of the mod.
+-> Fixes some obscure issues of sorting top item stacks for the Crystal Shulker Box.
+
+-> Optimized a bit more the top stacks list size lookup.
