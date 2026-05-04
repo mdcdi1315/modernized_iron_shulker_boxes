@@ -1,0 +1,14 @@
+{
+	"gui_texture": {
+		"texture_location": "modernized_iron_shulker_boxes:textures/gui/small_preset_gold_container.png",
+		"actual_texture_width": 256,
+		"actual_texture_height": 276,
+		"used_texture_width": 237,
+		"used_texture_height": 245
+	},
+	"inventory_text_x_position": 11,
+	"inventory_text_y_position": 148,
+	"inventory_slots_x_position": 39,
+	"inventory_slots_y_position": 243,
+	"item_stack_count_in_each_row": 12
+}

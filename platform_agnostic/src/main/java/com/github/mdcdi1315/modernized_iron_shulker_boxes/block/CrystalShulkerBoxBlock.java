@@ -2,6 +2,7 @@ package com.github.mdcdi1315.modernized_iron_shulker_boxes.block;
 
 import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.MaybeNull;
 
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity.CrystalShulkerBoxBlockEntity;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity.IronShulkerBoxesBlockEntities;
 

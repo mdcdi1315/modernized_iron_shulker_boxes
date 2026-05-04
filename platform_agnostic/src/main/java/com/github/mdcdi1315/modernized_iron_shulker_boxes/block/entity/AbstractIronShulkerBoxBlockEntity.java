@@ -3,7 +3,7 @@ package com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity;
 import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.MaybeNull;
 
 import com.github.mdcdi1315.basemodslib.utils.Extensions;
-import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.AbstractIronShulkerBoxBlock;
 
 import net.minecraft.core.BlockPos;
@@ -50,12 +50,12 @@ public abstract class AbstractIronShulkerBoxBlockEntity
     private byte closing_delay;
     private boolean close_sound_not_played;
 
-    public AbstractIronShulkerBoxBlockEntity(BlockEntityType<?> typeIn, BlockPos blockPos, BlockState blockState, IronShulkerBoxesTypes shulkerBoxTypeIn)
+    public AbstractIronShulkerBoxBlockEntity(BlockEntityType<?> type, BlockPos block_position, BlockState block_state, IronShulkerBoxesTypes shulker_box_type)
     {
-        super(typeIn, blockPos, blockState);
+        super(type, block_position, block_state);
 
         this.animationStatus = AnimationStatus.CLOSED;
-        this.itemStacks = NonNullList.withSize(shulkerBoxTypeIn.size, ItemStack.EMPTY);
+        this.itemStacks = NonNullList.withSize(shulker_box_type.GetSize(), ItemStack.EMPTY);
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, AbstractIronShulkerBoxBlockEntity pBlockEntity) { pBlockEntity.updateAnimation(pLevel, pPos, pState); }
@@ -228,7 +228,7 @@ public abstract class AbstractIronShulkerBoxBlockEntity
 
     @Override
     public void setItems(NonNullList<ItemStack> itemsIn) {
-        this.itemStacks = NonNullList.withSize(this.GetShulkerBoxType().size, ItemStack.EMPTY);
+        this.itemStacks = NonNullList.withSize(this.GetShulkerBoxType().GetSize(), ItemStack.EMPTY);
 
         for (int i = 0; i < itemsIn.size(); i++) {
             if (i < this.itemStacks.size()) {

@@ -4,6 +4,7 @@ import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.MaybeNul
 
 import com.github.mdcdi1315.basemodslib.codecs.CodecUtils;
 
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxItem;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesModInstance;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxUpgradeItem;

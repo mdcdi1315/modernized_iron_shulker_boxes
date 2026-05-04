@@ -1,7 +1,7 @@
 package com.github.mdcdi1315.modernized_iron_shulker_boxes.client;
 
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxColor;
-import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.AbstractIronShulkerBoxBlock;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity.AbstractIronShulkerBoxBlockEntity;
 

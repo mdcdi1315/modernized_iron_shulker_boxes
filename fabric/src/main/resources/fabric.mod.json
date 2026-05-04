@@ -18,7 +18,7 @@
 		"modmenu": {
 			"update_checker": false,
 			"links": {
-				"modmenu.discord": "${discord}"
+				"modmenu.curseforge": "${homepage}"
 			}
 		}
 	},
@@ -32,7 +32,9 @@
 		"mdcdi1315_basemodslib_client": [
 			"${group}.${mod_id}.client.IronShulkerBoxesClientModInstance"
 		],
-		"fabric-datagen": []
+		"fabric-datagen": [
+			"${group}.${mod_id}.datagen.DataGenEntryPoint"
+		]
 	},
 	"mixins": [
 		"${mod_id}.mixins.json"

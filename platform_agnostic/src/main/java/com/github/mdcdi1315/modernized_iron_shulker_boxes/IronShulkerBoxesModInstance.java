@@ -1,7 +1,5 @@
 package com.github.mdcdi1315.modernized_iron_shulker_boxes;
 
-import com.github.mdcdi1315.DotNetLayer.System.ArgumentException;
-
 import com.github.mdcdi1315.basemodslib.item.IItemRegistrar;
 import com.github.mdcdi1315.basemodslib.block.IBlockRegistrar;
 import com.github.mdcdi1315.basemodslib.eventapi.EventManager;
@@ -13,6 +11,7 @@ import com.github.mdcdi1315.basemodslib.registries.IRegistryRegistrar;
 import com.github.mdcdi1315.basemodslib.eventapi.mods.CommonSetupEvent;
 import com.github.mdcdi1315.basemodslib.block.entity.IBlockEntityRegistrar;
 
+import com.github.mdcdi1315.basemodslib.registries.RegistryUtils;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.tags.*;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.recipes.RecipesInitializer;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxesItems;
@@ -33,15 +32,7 @@ public final class IronShulkerBoxesModInstance
     public static Logger LOGGER;
     public static final String MOD_ID = "modernized_iron_shulker_boxes";
 
-    public static ResourceLocation ID(String name)
-            throws ArgumentException
-    {
-        var rl = ResourceLocation.tryBuild(MOD_ID , name);
-        if (rl == null) {
-            throw new ArgumentException("Cannot construct the specified ID!!\nName: " + name , "name");
-        }
-        return rl;
-    }
+    public static ResourceLocation ID(String name) { return RegistryUtils.ConstructResourceLocation(MOD_ID, name); }
 
     @Override
     public void Initialize() {
@@ -56,24 +47,16 @@ public final class IronShulkerBoxesModInstance
     }
 
     @Override
-    public void InitializeNetwork(NetworkManager manager) {
-        IronShulkerBoxesNetworking.Initialize(manager);
-    }
+    public void InitializeNetwork(NetworkManager manager) { IronShulkerBoxesNetworking.Initialize(manager); }
 
     @Override
-    public void RegisterBlocks(IBlockRegistrar registrar) {
-        IronShulkerBoxesBlocks.Initialize(registrar);
-    }
+    public void RegisterBlocks(IBlockRegistrar registrar) { IronShulkerBoxesBlocks.Initialize(registrar); }
 
     @Override
-    public void RegisterBlockEntities(IBlockEntityRegistrar registrar) {
-        IronShulkerBoxesBlockEntities.Initialize(registrar);
-    }
+    public void RegisterBlockEntities(IBlockEntityRegistrar registrar) { IronShulkerBoxesBlockEntities.Initialize(registrar); }
 
     @Override
-    public void RegisterItems(IItemRegistrar registrar) {
-        IronShulkerBoxesItems.Initialize(registrar);
-    }
+    public void RegisterItems(IItemRegistrar registrar) { IronShulkerBoxesItems.Initialize(registrar); }
 
     @Override
     public void RegisterEvents(EventManager manager) {
@@ -83,14 +66,10 @@ public final class IronShulkerBoxesModInstance
     }
 
     @Override
-    public void RegisterMenuTypes(IMenuTypeRegistrar registrar) {
-        IronShulkerBoxesMenuTypes.Initialize(registrar);
-    }
+    public void RegisterMenuTypes(IMenuTypeRegistrar registrar) { IronShulkerBoxesMenuTypes.Initialize(registrar); }
 
     @Override
-    public void RegisterRegistryItems(IRegistryRegistrar registrar) {
-        RecipesInitializer.Initialize(registrar);
-    }
+    public void RegisterRegistryItems(IRegistryRegistrar registrar) { RecipesInitializer.Initialize(registrar); }
 
     @Override
     public String GetModId() { return MOD_ID; }

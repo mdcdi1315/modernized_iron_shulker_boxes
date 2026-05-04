@@ -1,0 +1,14 @@
+{
+	"gui_texture": {
+		"texture_location": "modernized_iron_shulker_boxes:textures/gui/small_preset_diamond_container.png",
+		"actual_texture_width": 320,
+		"actual_texture_height": 256,
+		"used_texture_width": 309,
+		"used_texture_height": 243
+	},
+	"inventory_text_x_position": 60,
+	"inventory_text_y_position": 148,
+	"inventory_slots_x_position": 75,
+	"inventory_slots_y_position": 242,
+	"item_stack_count_in_each_row": 16
+}

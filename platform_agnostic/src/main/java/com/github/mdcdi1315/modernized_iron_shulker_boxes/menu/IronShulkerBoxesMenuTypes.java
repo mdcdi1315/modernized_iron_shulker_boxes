@@ -23,40 +23,19 @@ public final class IronShulkerBoxesMenuTypes
 
     public static void Initialize(IMenuTypeRegistrar registrar)
     {
-        registrar.Register("iron_shulker_box_menu" , new MenuTypeRegistrationInfo<>(
-                FeatureFlags.VANILLA_SET,
-                IronShulkerBoxMenu::CreateMenuDirect
-        ));
+        registrar.Register("iron_shulker_box_menu" , new MenuTypeRegistrationInfo<>(FeatureFlags.VANILLA_SET, IronShulkerBoxMenu::new));
 
-        registrar.Register("copper_shulker_box_menu" , new MenuTypeRegistrationInfo<>(
-                FeatureFlags.VANILLA_SET,
-                CopperShulkerBoxMenu::CreateMenuDirect
-        ));
+        registrar.Register("copper_shulker_box_menu" , new MenuTypeRegistrationInfo<>(FeatureFlags.VANILLA_SET, CopperShulkerBoxMenu::new));
 
-        registrar.Register("gold_shulker_box_menu" , new MenuTypeRegistrationInfo<>(
-                FeatureFlags.VANILLA_SET,
-                GoldShulkerBoxMenu::CreateMenuDirect
-        ));
+        registrar.Register("gold_shulker_box_menu" , new MenuTypeRegistrationInfo<>(FeatureFlags.VANILLA_SET, GoldShulkerBoxMenu::new));
 
-        registrar.Register("diamond_shulker_box_menu", new MenuTypeRegistrationInfo<>(
-                FeatureFlags.VANILLA_SET,
-                DiamondShulkerBoxMenu::CreateMenuDirect
-        ));
+        registrar.Register("diamond_shulker_box_menu", new MenuTypeRegistrationInfo<>(FeatureFlags.VANILLA_SET, DiamondShulkerBoxMenu::new));
 
-        registrar.Register("crystal_shulker_box_menu" , new MenuTypeRegistrationInfo<>(
-                FeatureFlags.VANILLA_SET,
-                CrystalShulkerBoxMenu::CreateMenuDirect
-        ));
+        registrar.Register("crystal_shulker_box_menu" , new MenuTypeRegistrationInfo<>(FeatureFlags.VANILLA_SET, CrystalShulkerBoxMenu::new));
 
-        registrar.Register("obsidian_shulker_box_menu", new MenuTypeRegistrationInfo<>(
-                FeatureFlags.VANILLA_SET,
-                ObsidianShulkerBoxMenu::CreateMenuDirect
-        ));
+        registrar.Register("obsidian_shulker_box_menu", new MenuTypeRegistrationInfo<>(FeatureFlags.VANILLA_SET, ObsidianShulkerBoxMenu::new));
 
-        registrar.Register("netherite_shulker_box_menu", new MenuTypeRegistrationInfo<>(
-                FeatureFlags.VANILLA_SET,
-                NetheriteShulkerBoxMenu::CreateMenuDirect
-        ));
+        registrar.Register("netherite_shulker_box_menu", new MenuTypeRegistrationInfo<>(FeatureFlags.VANILLA_SET, NetheriteShulkerBoxMenu::new));
     }
 
     public static void InitializeFields(MenuTypeRegistryFinalizedEvent event) {

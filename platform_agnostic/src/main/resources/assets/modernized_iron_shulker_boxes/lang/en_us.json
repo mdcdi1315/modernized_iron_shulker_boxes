@@ -41,5 +41,9 @@
 	"modernized_iron_shulker_boxes.upgrading.error.invalid_block": "This item cannot be used to upgrade a '%s'; it must be applied to a '%s' instead.",
   	"item.modernized_iron_shulker_boxes.vanilla_to_copper_shulker_box_upgrade": "Vanilla to Copper Shulker Box Upgrade",
   	"item.modernized_iron_shulker_boxes.vanilla_to_iron_shulker_box_upgrade": "Vanilla to Iron Shulker Box Upgrade",
+
+	"configuration.modernized_iron_shulker_boxes_client.menu_texture_and_placement_data_id": "Menu Placements Data Loader Preset ID",
+	"configuration.modernized_iron_shulker_boxes_client.menu_texture_and_placement_data_id.desc": "Instructs the Menu Placements Data Loader to attempt to load the preset of the specified ID, instead of the default.\nNew Menu Placements Presets are defined through resource packs in the modernized_iron_shulker_boxes/menu_placements folder.\nIf the preset has partial or invalid data, the default data will be instead loaded.",
+
   	"creative_mode_tab.modernized_iron_shulker_boxes": "Iron Shulker Boxes"
 }

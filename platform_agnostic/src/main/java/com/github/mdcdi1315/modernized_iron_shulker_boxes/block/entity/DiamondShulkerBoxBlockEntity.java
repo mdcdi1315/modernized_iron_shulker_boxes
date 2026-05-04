@@ -1,7 +1,7 @@
 package com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity;
 
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.menu.DiamondShulkerBoxMenu;
-import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;

@@ -5,7 +5,7 @@ import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.NotNull;
 import com.github.mdcdi1315.basemodslib.item.ItemStackSet;
 
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.menu.CrystalShulkerBoxMenu;
-import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesTypes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

@@ -1,5 +1,10 @@
-### Releasing Version 1.0.2:
+### Releasing Version 1.0.3:
 
--> Fixes some obscure issues of sorting top item stacks for the Crystal Shulker Box.
+-> Added Menu Placements resource pack subsystem
 
--> Optimized a bit more the top stacks list size lookup.
+-> Added a new Crystal Shulker Box texture to replace the current one in the future. 
+This is experimental and can be toggled by using the `new_crystal_box_texture` menu placement preset.
+
+-> Advancements and recipes for Shulker Box coloring are now data-generated.
+
+-> Fix several links in mod manifests.
