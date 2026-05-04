@@ -1,8 +1,9 @@
 package com.github.mdcdi1315.modernized_iron_shulker_boxes.client;
 
 import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.AllowNull;
+
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxColor;
-import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesModInstance;
 
 import com.google.common.collect.ImmutableList;

@@ -6,9 +6,9 @@ import com.github.mdcdi1315.basemodslib.block.IBlockRegistrar;
 import com.github.mdcdi1315.basemodslib.block.BlockRegistrationInformation;
 
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxItem;
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxesItems;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.creative_mode_tab.IronShulkerBoxesCreativeModeTabs;
 
-import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxesItems;
 import net.minecraft.world.item.Item;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;

@@ -2,19 +2,17 @@ package com.github.mdcdi1315.modernized_iron_shulker_boxes.client.itemrendering;
 
 import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.AllowNull;
 
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.client.ShulkerBoxModel;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxItem;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxColor;
-import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.client.IronShulkerBoxesModels;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.datacomponent.IronShulkerBoxColorDataComponentType;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import com.mojang.serialization.MapCodec;
 
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.world.item.ItemDisplayContext;

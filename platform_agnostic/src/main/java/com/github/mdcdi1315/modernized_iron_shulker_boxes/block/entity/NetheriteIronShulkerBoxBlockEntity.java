@@ -1,6 +1,6 @@
 package com.github.mdcdi1315.modernized_iron_shulker_boxes.block.entity;
 
-import com.github.mdcdi1315.modernized_iron_shulker_boxes.block.IronShulkerBoxesTypes;
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.menu.NetheriteShulkerBoxMenu;
 
 import net.minecraft.core.BlockPos;

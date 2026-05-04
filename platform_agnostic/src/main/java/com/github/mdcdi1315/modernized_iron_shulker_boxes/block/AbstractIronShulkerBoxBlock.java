@@ -4,6 +4,7 @@ import com.github.mdcdi1315.DotNetLayer.System.Diagnostics.CodeAnalysis.MaybeNul
 
 import com.github.mdcdi1315.basemodslib.codecs.CodecUtils;
 
+import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesTypes;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxesItems;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.IronShulkerBoxesModInstance;
 import com.github.mdcdi1315.modernized_iron_shulker_boxes.item.IronShulkerBoxUpgradeItem;
@@ -14,7 +15,6 @@ import com.google.common.collect.Maps;
 
 import com.mojang.serialization.MapCodec;
 
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.core.BlockPos;
@@ -31,6 +31,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.Shulker;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.level.block.state.BlockState;

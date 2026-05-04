@@ -1,0 +1,14 @@
+{
+	"gui_texture": {
+		"texture_location": "modernized_iron_shulker_boxes:textures/gui/crystal_container.png",
+		"actual_texture_width": 256,
+		"actual_texture_height": 276,
+		"used_texture_width": 238,
+		"used_texture_height": 276
+	},
+	"inventory_text_x_position": 8,
+	"inventory_text_y_position": 182,
+	"inventory_slots_x_position": 39,
+	"inventory_slots_y_position": 276,
+	"item_stack_count_in_each_row": 12
+}

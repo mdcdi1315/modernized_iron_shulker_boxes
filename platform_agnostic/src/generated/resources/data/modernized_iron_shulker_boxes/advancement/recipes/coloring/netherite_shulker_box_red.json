@@ -1,0 +1,53 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "already_has_the_recipe": {
+      "conditions": {
+        "recipe": "modernized_iron_shulker_boxes:shulker_boxes_coloring/red_netherite_shulker_box_recipe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_box_recipe": {
+      "conditions": {
+        "recipe": "modernized_iron_shulker_boxes:shulker_boxes_default/netherite_shulker_box"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_box_with_him": {
+      "conditions": {
+        "items": [
+          {
+            "items": "modernized_iron_shulker_boxes:netherite_shulker_box"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_dye": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:red_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_box_recipe",
+      "has_the_box_with_him",
+      "already_has_the_recipe"
+    ],
+    [
+      "has_the_dye",
+      "already_has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "modernized_iron_shulker_boxes:shulker_boxes_coloring/red_netherite_shulker_box_recipe"
+    ]
+  }
+}

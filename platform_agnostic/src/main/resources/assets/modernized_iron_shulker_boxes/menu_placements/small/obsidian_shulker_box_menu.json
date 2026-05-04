@@ -1,0 +1,14 @@
+{
+	"gui_texture": {
+		"texture_location": "modernized_iron_shulker_boxes:textures/gui/small_preset_obsidian_container.png",
+		"actual_texture_width": 320,
+		"actual_texture_height": 320,
+		"used_texture_width": 310,
+		"used_texture_height": 281
+	},
+	"inventory_text_x_position": 53,
+	"inventory_text_y_position": 185,
+	"inventory_slots_x_position": 75,
+	"inventory_slots_y_position": 279,
+	"item_stack_count_in_each_row": 16
+}

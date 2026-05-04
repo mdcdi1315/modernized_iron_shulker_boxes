@@ -1,0 +1,14 @@
+{
+	"gui_texture": {
+		"texture_location": "modernized_iron_shulker_boxes:textures/gui/small_preset_netherite_container.png",
+		"actual_texture_width": 384,
+		"actual_texture_height": 276,
+		"used_texture_width": 382,
+		"used_texture_height": 275
+	},
+	"inventory_text_x_position": 95,
+	"inventory_text_y_position": 182,
+	"inventory_slots_x_position": 111,
+	"inventory_slots_y_position": 275,
+	"item_stack_count_in_each_row": 20
+}
