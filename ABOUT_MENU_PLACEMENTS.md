@@ -41,17 +41,18 @@ As such, two players can use different menu textures, and both of them can inter
 
 Fields description:
 
-| Field                        | Description                                                                                              |
-|------------------------------|----------------------------------------------------------------------------------------------------------|
-| `texture_location`           | Location of the texture to use.                                                                          |
-| `actual_texture_width`       | Exact width of the GUI Texture, specified in pixels.                                                     |
-| `actual_texture_height`      | Exact height of the GUI Texture, specified in pixels.                                                    |
-| `used_texture_width`         | The exact width of the area of the GUI Texture currently in use. Also specified in pixels.               |
-| `used_texture_height`        | The exact height of the area of the GUI Texture currently in use. Also specified in pixels.              |
-| `inventory_text_x_position`  | Absolute X position where the `Inventory` text will be drawn to. Also specified in pixels.               |
-| `inventory_text_y_position`  | Absolute Y position where the `Inventory` text will be drawn to. Also specified in pixels.               |
-| `inventory_slots_x_position` | Absolute X position of the top-left corner of the player's inventory slots. Also specified in pixels.    |
-| `inventory_slots_y_position` | Absolute Y position of the bottom-left corner of the player's inventory slots. Also specified in pixels. |
+| Field                          | Description                                                                                              |
+|--------------------------------|----------------------------------------------------------------------------------------------------------|
+| `texture_location`             | Location of the texture to use.                                                                          |
+| `actual_texture_width`         | Exact width of the GUI Texture, specified in pixels.                                                     |
+| `actual_texture_height`        | Exact height of the GUI Texture, specified in pixels.                                                    |
+| `used_texture_width`           | The exact width of the area of the GUI Texture currently in use. Also specified in pixels.               |
+| `used_texture_height`          | The exact height of the area of the GUI Texture currently in use. Also specified in pixels.              |
+| `inventory_text_x_position`    | Absolute X position where the `Inventory` text will be drawn to. Also specified in pixels.               |
+| `inventory_text_y_position`    | Absolute Y position where the `Inventory` text will be drawn to. Also specified in pixels.               |
+| `inventory_slots_x_position`   | Absolute X position of the top-left corner of the player's inventory slots. Also specified in pixels.    |
+| `inventory_slots_y_position`   | Absolute Y position of the bottom-left corner of the player's inventory slots. Also specified in pixels. |
+| `item_stack_count_in_each_row` | Number of item stacks displayed in each item row of the shulker box's inventory.                         |
 
 > [!NOTE]
 Due to how the `inventory_slots_y_position` is expressed due to compatibility reasons, to specify this correctly go to the bottom left corner of 
